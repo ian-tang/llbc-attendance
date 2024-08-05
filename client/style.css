@@ -1,0 +1,118 @@
+@import url("./reset.css");
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background: rgb(218, 167, 233);
+	background: linear-gradient(90deg, rgba(218, 167, 233, 1) 0%, rgba(242, 114, 190, 1) 39%, rgba(255, 134, 103, 1) 100%);
+}
+
+.main {
+	padding: 1rem;
+}
+
+ul {
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+.form-header {
+	text-align: center;
+}
+
+.shadow {
+	box-shadow: 0 0.5rem 0.5rem 0.25rem hsla(0, 0%, 10%, 0.05);
+}
+
+.white-container {
+	background-color: white;
+	border-radius: 1rem;
+	padding: 1rem;
+	border: 1px solid #a8a8a8;
+}
+
+#sign-in {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1.5rem;
+	padding: 1rem;
+	gap: 1.5rem;
+	max-width: 90vw;
+	min-width: 260px;
+}
+
+#sign-in section {
+	width: 100%;
+}
+
+#sign-in fieldset {
+	border-radius: .5rem;
+}
+
+.center-horizontal {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.center-vertical {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.required {
+	font-weight: bold;
+	color: #d60000;
+}
+
+.name-fields {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	gap: 1rem;
+}
+
+.label-above {
+	width: 100%;
+
+	label {
+		width: 100%;
+
+		input {
+			width: 100%;
+		}
+	}
+}
+
+.check-multiple::after {
+	content: " (check all that apply)"
+}
+
+#submit-btn {
+	padding: 1rem;
+	border-radius: 0.5rem;
+	border: none;
+	background-color: cornflowerblue;
+	color: white;
+	font-weight: bold;
+}
+
+/* TODO: mobile first, responsive design */
+/* 	small: 320x640
+/* 	medium: 768x1024 to 1366x768 */
+/* 	large: 1440x1024 */
+
+@media only screen and (min-width: 576px) {}
+
+@media only screen and (min-width: 992px) {}

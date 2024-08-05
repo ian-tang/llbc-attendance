@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>PBC Attendance Info</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <script src="index.js"></script>
+  <main class="main">
+    <header>
+      <h2 class="form-header shadow white-container">Welcome to Lefty Loosey Bike Collective!</h2>
+    </header>
+
+    <form class="shadow white-container" id="sign-in">
+      <h2>Check in by entering your information</h2>
+
+      <section>
+        <h3>Personal info</h3>
+        <fieldset class="name-fields">
+          <div class="label-above">
+            <label for="first-name">
+              <div>First name: <span class="required" aria-label="required">*</span></div>
+              <input type="text" id="first-name" name="first-name" />
+            </label>
+          </div>
+          <div class="label-above">
+            <label for="last-name">
+              <div>
+                <span>Last name: <span class="required" aria-label="required">*</span></span>
+              </div>
+              <input type="text" id="last-name" name="last-name" />
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section>
+        <h3 class="check-multiple">What brings you in today?</h3>
+        <fieldset>
+          <legend>
+            I am here to: <span class="required" aria-label="required">*</span>
+          </legend>
+          <ul>
+            <li>
+              <label for="role_volunteer">
+                <input type="checkbox" name="role" id="role_volunteer" value="volunteer" />
+                Volunteer my time and help out
+              </label>
+            </li>
+            <li>
+              <label for="role_get_assistance">
+                <input type="checkbox" name="role" id="role_get_assistance" value="client" />
+                Get assistance with repairing my bike
+              </label>
+            </li>
+            <li>
+              <label for="role_purchase_parts">
+                <input type="checkbox" name="role" id="role_purchase_parts" value="client" />
+                Buy a bike or bike parts
+              </label>
+            </li>
+            <li>
+              <label for="role_donate_parts">
+                <input type="checkbox" name="role" id="role_donate_parts" value="client" />
+                Donate a bike or bike parts
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+      </section>
+
+      <section>
+        <h3 class="check-multiple">Interest areas</h3>
+        <fieldset>
+          <ul>
+            <li>
+              <label for="interest_sustainability">
+                <input type="checkbox" name="interests" id="interest_sustainability" value="sustainability" />
+                Sustainability
+              </label>
+            </li>
+            <li>
+              <label for="interest_diy">
+                <input type="checkbox" name="interests" id="interest_diy" value="diy" />
+                DIY
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+      </section>
+
+      <section class="center-horizontal">
+        <span class="required">* </span>&nbsp– required
+      </section>
+
+      <section class="center-horizontal">
+        <button type="submit" id="submit-btn">Submit</button>
+      </section>
+    </form>
+
+  </main>
+</body>
+
+</html>
