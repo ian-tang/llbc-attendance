@@ -94,14 +94,14 @@ legend {
 
 .label-above {
 	width: 100%;
+}
 
-	label {
-		width: 100%;
+.label-above label {
+	width: 100%;
+}
 
-		input {
-			width: 100%;
-		}
-	}
+.label-above label input {
+	width: 100%;
 }
 
 .check-multiple::after {
