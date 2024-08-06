@@ -108,6 +108,15 @@ legend {
 	content: " (check all that apply)"
 }
 
+.checkbox {
+	display: flex;
+	flex-direction: row;
+	width: fit-content;
+	justify-content: space-between;
+	gap: 0.5rem;
+	align-items: center;
+}
+
 #submit-btn {
 	padding: 1rem;
 	border-radius: 0.5rem;
