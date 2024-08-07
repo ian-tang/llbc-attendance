@@ -110,12 +110,10 @@ legend {
 }
 
 .checkbox {
-	display: flex;
-	flex-direction: row;
-	width: fit-content;
-	justify-content: space-between;
-	gap: 0.5rem;
+	display: grid;
 	align-items: center;
+	grid-template-columns: 1rem auto;
+	gap: 0.5rem;
 }
 
 #submit-btn {
