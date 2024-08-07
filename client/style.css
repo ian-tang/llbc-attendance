@@ -56,7 +56,7 @@ legend {
 	padding: 1.5rem;
 	gap: 1.5rem;
 	max-width: 40rem;
-	min-width: 260px;
+	min-width: 280px;
 }
 
 #sign-in section {
@@ -67,6 +67,7 @@ legend {
 	border: 2px solid #bebebd;
 	border-radius: 0.5rem;
 	margin-top: 0.25rem;
+	padding: 0.75rem;
 }
 
 .center-horizontal {
@@ -105,8 +106,12 @@ legend {
 	width: 100%;
 }
 
+.label-above label div {
+	text-wrap: nowrap;
+}
+
 .check-multiple::after {
-	content: " (check all that apply)"
+	content: " (check all that apply)";
 }
 
 .checkbox {
@@ -114,6 +119,48 @@ legend {
 	align-items: center;
 	grid-template-columns: 1rem auto;
 	gap: 0.5rem;
+}
+
+input[type="checkbox"] {
+	appearance: none;
+	background-color: #fff;
+	margin: 0;
+	width: 1.15rem;
+	height: 1.15rem;
+	border: 0.15rem solid black;
+	border-radius: 0.15rem;
+	display: grid;
+	place-content: center;
+}
+
+input[type="checkbox"]::before {
+	content: "";
+	width: 0.65rem;
+	height: 0.65rem;
+	transform: scale(0);
+	color: #81d185;
+	background-color: #308535;
+	transition: 80ms transform ease-in-out;
+	transform-origin: bottom left;
+	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	z-index: 10;
+}
+
+input[type="checkbox"]:checked::before {
+	transform: scale(1);
+	display: block;
+}
+
+input[type="text"] {
+	border: 2px solid #222222;
+	border-radius: 0.25rem;
+	display: grid;
+	place-content: center;
+}
+
+input[type="text"]:focus-visible {
+	outline: none;
+	border-color: #0070ff;
 }
 
 #submit-btn {
