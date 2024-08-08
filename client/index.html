@@ -21,19 +21,27 @@
 
       <section>
         <h3>Personal info</h3>
-        <fieldset class="name-fields">
-          <div class="label-above">
-            <label for="first-name">
-              <div>First name: <span class="required" aria-label="required">*</span></div>
-              <input type="text" id="first-name" name="first-name" />
-            </label>
+        <fieldset class="personal-info">
+          <div class="name-fields">
+            <div class="label-above">
+              <label for="first-name">
+                <div>First name: <span class="required" aria-label="required">*</span></div>
+                <input type="text" id="first-name" name="first-name" />
+              </label>
+            </div>
+            <div class="label-above">
+              <label for="last-name">
+                <div>
+                  <span>Last name: <span class="required" aria-label="required">*</span></span>
+                </div>
+                <input type="text" id="last-name" name="last-name" />
+              </label>
+            </div>
           </div>
           <div class="label-above">
-            <label for="last-name">
-              <div>
-                <span>Last name: <span class="required" aria-label="required">*</span></span>
-              </div>
-              <input type="text" id="last-name" name="last-name" />
+            <label for="phone-number">
+              <div>Phone number: <span class="required" aria-label="required">*</span></div>
+              <input type="text" id="phone-number" name="phone-number" placeholder="(555) 555-5555" />
             </label>
           </div>
         </fieldset>
