@@ -72,7 +72,7 @@ legend {
   border: 2px solid #bebebd;
   border-radius: 0.5rem;
   margin-top: 0.25rem;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .center-horizontal {
@@ -128,7 +128,7 @@ legend {
 
 .checkbox {
   display: grid;
-  align-items: center;
+  align-items: start;
   grid-template-columns: 1rem auto;
   gap: 0.5rem;
 }
@@ -141,6 +141,7 @@ input[type='checkbox'] {
   height: 1.15rem;
   border: 0.15rem solid black;
   border-radius: 0.15rem;
+  transform: translateY(0.17rem);
   display: grid;
   place-content: center;
 }
@@ -155,7 +156,6 @@ input[type='checkbox']::before {
   transition: 80ms transform ease-in-out;
   transform-origin: bottom left;
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  z-index: 10;
 }
 
 input[type='checkbox']:checked::before {
@@ -174,6 +174,13 @@ input[type='text'] {
 input[type='text']:focus-visible {
   outline: none;
   border-color: #0070ff;
+}
+
+#liability-terms-btn {
+  color: blue;
+  text-decoration: underline;
+  position: relative;
+  z-index: 10;
 }
 
 #submit-btn {
