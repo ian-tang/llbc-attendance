@@ -167,7 +167,8 @@ input[type='checkbox']:checked::before {
   display: block;
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='tel'] {
   border: 2px solid #222222;
   border-radius: 0.25rem;
   display: grid;
@@ -210,7 +211,7 @@ input[type='text']:focus-visible {
 
 #modal {
   position: fixed;
-  transform: translateY(18vh);
+  transform: translateY(15vh);
   transform-origin: top;
   width: 90vw;
   max-width: 800px;
