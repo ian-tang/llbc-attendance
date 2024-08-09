@@ -37,6 +37,10 @@ legend {
   border-radius: 0.5rem;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .form-header {
   text-align: center;
 }
@@ -181,6 +185,10 @@ input[type='text']:focus-visible {
   text-decoration: underline;
   position: relative;
   z-index: 10;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 #submit-btn {
@@ -190,6 +198,31 @@ input[type='text']:focus-visible {
   background-color: cornflowerblue;
   color: white;
   font-weight: bold;
+}
+
+#modal-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}
+
+#modal {
+  position: fixed;
+  transform: translateY(18vh);
+  transform-origin: top;
+  width: 90vw;
+  max-width: 800px;
+  height: 90vh;
+  max-height: 600px;
+  background-color: white;
+  border-radius: 1rem;
+  z-index: 30;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* TODO: mobile first, responsive design */
