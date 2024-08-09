@@ -210,6 +210,7 @@ input[type='text']:focus-visible {
 }
 
 #modal {
+  display: flex;
   position: fixed;
   transform: translateY(15vh);
   transform-origin: top;
@@ -219,11 +220,33 @@ input[type='text']:focus-visible {
   max-height: 600px;
   background-color: white;
   border-radius: 1rem;
+  padding: 2rem;
   z-index: 30;
 }
 
 .hidden {
   display: none !important;
+}
+
+#modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#liability-text {
+  margin-top: 1rem;
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+  overscroll-behavior-y: none;
+  flex-grow: 1;
+}
+
+#liability-text p + p {
+  margin-top: 1rem;
+}
+
+#modal-checkbox-label {
+  margin-top: 1rem;
 }
 
 /* TODO: mobile first, responsive design */

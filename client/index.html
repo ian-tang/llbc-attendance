@@ -13,7 +13,91 @@
   <script src="index.js"></script>
 
   <div id="modal-overlay" class="hidden"></div>
-  <section id="modal" class="hidden"></section>
+  <section id="modal" class="hidden">
+    <article id="modal-content">
+      <h3 id="modal-header">PVD Bike Collective Liability Waiver</h3>
+      <hr>
+      <section id="liability-text">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor turpis rutrum placerat imperdiet.
+          Maecenas
+          feugiat eu est sit amet gravida. Nullam varius blandit purus sit amet dictum. Nullam eleifend tempus ex vitae
+          mollis. Mauris ultricies euismod interdum. Aenean porta eu magna vel maximus. Sed vitae laoreet justo. Nunc
+          eleifend libero nec magna ornare, eu dignissim purus congue. Etiam quis mauris a urna sollicitudin pretium
+          eget
+          quis ante. Vivamus dictum ipsum ac vestibulum auctor. Maecenas lectus libero, porttitor eu convallis eget,
+          auctor
+          at lorem. Integer ornare, felis id luctus rhoncus, est risus elementum nibh, at mattis ante neque at odio.
+          Donec
+          ut tempor turpis, ac tristique mi. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in
+          faucibus.
+        </p>
+
+        <p>
+          Vivamus ut velit sem. Proin efficitur, eros quis eleifend lacinia, risus nibh aliquam lorem, ut auctor elit
+          ante
+          ac neque. Vivamus ipsum sapien, vehicula vitae sollicitudin nec, laoreet id sem. Duis aliquam ipsum erat.
+          Mauris
+          nisi nisl, ornare et nunc nec, ornare fermentum ante. Donec sit amet metus mauris. Proin aliquet felis sed
+          suscipit ultrices. Integer efficitur, nibh vitae malesuada auctor, neque nibh malesuada dui, vulputate
+          vestibulum
+          ante ante eu nisi. Praesent placerat, tellus sit amet consectetur tempor, augue felis placerat leo, vitae
+          posuere
+          enim erat quis tortor. Duis pellentesque est ut fringilla tempor.
+        </p>
+
+        <p>
+          Suspendisse eget felis lectus. Praesent mollis interdum nisi volutpat elementum. Ut convallis in justo ut
+          aliquet.
+          Morbi consectetur auctor magna, porta rutrum metus malesuada non. In sit amet lorem laoreet, vehicula ligula
+          elementum, fringilla turpis. Nulla imperdiet nisi lobortis, ultrices neque a, rutrum ligula. Morbi in ante
+          nulla.
+          Quisque finibus, ex at interdum posuere, ipsum nibh eleifend sem, quis posuere nibh magna vitae lorem. Etiam
+          id
+          tortor et nunc faucibus pretium. In hac habitasse platea dictumst. Quisque a nibh leo. Integer risus augue,
+          semper
+          in rutrum vel, blandit eu turpis.
+        </p>
+
+        <p>
+          Nam nec lorem eu turpis tristique tempus. Suspendisse at lectus quis eros aliquam imperdiet. Nulla et purus
+          lectus. Duis scelerisque est sed egestas sollicitudin. Nunc est nibh, lobortis vitae vehicula eget, tristique
+          vel
+          felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas vitae
+          mi
+          mollis, facilisis ante sed, molestie libero. Vivamus semper at ex vitae fermentum. Sed nunc metus, facilisis
+          et
+          bibendum rhoncus, ullamcorper ac mauris. Morbi quis neque eu lacus molestie accumsan eget ut magna. Aenean
+          tincidunt enim ut felis consectetur condimentum. Nulla dictum, odio quis interdum maximus, lacus nunc gravida
+          lacus, quis elementum purus elit quis elit.
+        </p>
+
+        <p>
+          Nam tellus turpis, finibus viverra pellentesque id, porta in turpis. In non velit sodales, tempor nisi ut,
+          pharetra lectus. Pellentesque vehicula massa non lacinia aliquam. Donec viverra urna nec sem efficitur, nec
+          fermentum tortor dapibus. Phasellus maximus tortor eu lectus laoreet, et facilisis ex eleifend. Aliquam
+          ornare,
+          elit suscipit convallis venenatis, dui neque molestie sem, non placerat dolor est sit amet elit. Integer
+          volutpat
+          diam sed magna scelerisque, quis suscipit urna faucibus. Nullam malesuada, augue eu volutpat fringilla, sapien
+          ligula vulputate sapien, in aliquam purus erat in purus. Sed ut congue orci, vitae tincidunt metus. Morbi sed
+          rutrum odio, et scelerisque metus. Nunc sagittis bibendum leo eu ultricies. Aliquam erat volutpat. Duis
+          pulvinar
+          ultrices massa eu consequat. Vivamus consequat, mauris non gravida vehicula, mauris tellus vestibulum diam,
+          vitae
+          maximus ante justo vitae enim. Etiam vulputate vitae nulla id tincidunt.
+        </p>
+      </section>
+      <label class="checkbox" id="modal-checkbox-label" for="modal-checkbox">
+        <input type="checkbox" id="modal-checkbox" />
+        <span>
+          By checking this box, I certify that I have read, understand, and agree to the terms above.
+        </span>
+      </label>
+    </article>
+  </section>
+
+  </p>
 
   <main class="main">
     <header>
@@ -30,7 +114,7 @@
             <div class="label-above">
               <label for="first-name">
                 <div>First name: <span class="required" aria-label="required">*</span></div>
-                <input type="text" id="first-name" name="first-name" />
+                <input type="text" id="first-name" name="first-name" required />
               </label>
             </div>
             <div class="label-above">
@@ -38,14 +122,14 @@
                 <div>
                   <span>Last name: <span class="required" aria-label="required">*</span></span>
                 </div>
-                <input type="text" id="last-name" name="last-name" />
+                <input type="text" id="last-name" name="last-name" required />
               </label>
             </div>
           </div>
           <div class="label-above">
             <label for="phone-number">
               <div>Phone number: <span class="required" aria-label="required">*</span></div>
-              <input type="tel" id="phone-number" name="phone-number" placeholder="(555) 555-5555" />
+              <input type="tel" id="phone-number" name="phone-number" placeholder="(555) 555-5555" required />
             </label>
           </div>
         </fieldset>
@@ -59,26 +143,26 @@
           </legend>
           <ul>
             <li>
-              <label class="checkbox" for="role_volunteer">
-                <input type="checkbox" name="role" id="role_volunteer" value="volunteer" />
+              <label class="checkbox" for="role-volunteer">
+                <input type="checkbox" name="role" id="role-volunteer" value="volunteer" />
                 Volunteer my time and help out
               </label>
             </li>
             <li>
-              <label class="checkbox" for="role_get_assistance">
-                <input type="checkbox" name="role" id="role_get_assistance" value="client" />
+              <label class="checkbox" for="role-get-assistance">
+                <input type="checkbox" name="role" id="role-get-assistance" value="client" />
                 Get assistance with repairing my bike
               </label>
             </li>
             <li>
-              <label class="checkbox" for="role_purchase_parts">
-                <input type="checkbox" name="role" id="role_purchase_parts" value="client" />
+              <label class="checkbox" for="role-purchase-parts">
+                <input type="checkbox" name="role" id="role-purchase-parts" value="client" />
                 Buy a bike or bike parts
               </label>
             </li>
             <li>
-              <label class="checkbox" for="role_donate_parts">
-                <input type="checkbox" name="role" id="role_donate_parts" value="donor" />
+              <label class="checkbox" for="role-donate-parts">
+                <input type="checkbox" name="role" id="role-donate-parts" value="donor" />
                 Donate a bike or bike parts
               </label>
             </li>
@@ -92,8 +176,8 @@
           <legend>
             Please read and agree to the terms: <span class="required" aria-label="required">*</span>
           </legend>
-          <label class="checkbox" for="liability_waiver">
-            <input type="checkbox" id="liability_waiver" />
+          <label class="checkbox" for="liability-waiver">
+            <input type="checkbox" name="liability-waiver" id="liability-waiver" value="true" required />
             <span>
               By checking this box, I certify that I have read, understand, and agree to the terms of PBC's
               <button role="button" id="liability-terms-btn">Liability Waiver</button>.
@@ -107,32 +191,32 @@
         <fieldset>
           <ul>
             <li>
-              <label class="checkbox" for="interest_mechanics">
-                <input type="checkbox" name="interests" id="interest_mechanics" value="mechanics" />
+              <label class="checkbox" for="interest-mechanics">
+                <input type="checkbox" name="interests" id="interest-mechanics" value="mechanics" />
                 Understanding mechanical systems
               </label>
             </li>
             <li>
-              <label class="checkbox" for="interest_infrastructure">
-                <input type="checkbox" name="interests" id="interest_infrastructure" value="infrastructure" />
+              <label class="checkbox" for="interest-infrastructure">
+                <input type="checkbox" name="interests" id="interest-infrastructure" value="infrastructure" />
                 Transit infrastructure
               </label>
             </li>
             <li>
-              <label class="checkbox" for="interest_sustainability">
-                <input type="checkbox" name="interests" id="interest_sustainability" value="sustainability" />
+              <label class="checkbox" for="interest-sustainability">
+                <input type="checkbox" name="interests" id="interest-sustainability" value="sustainability" />
                 Sustainability
               </label>
             </li>
             <li>
-              <label class="checkbox" for="interest_diy">
-                <input type="checkbox" name="interests" id="interest_diy" value="diy" />
+              <label class="checkbox" for="interest-diy">
+                <input type="checkbox" name="interests" id="interest-diy" value="diy" />
                 DIY
               </label>
             </li>
             <li>
-              <label class="checkbox" for="interest_equitability">
-                <input type="checkbox" name="interests" id="interest_equitability" value="equitability" />
+              <label class="checkbox" for="interest-equitability">
+                <input type="checkbox" name="interests" id="interest-equitability" value="equitability" />
                 Social justice and equitability
               </label>
             </li>
@@ -144,8 +228,8 @@
         <h3>Photo release</h3>
         <fieldset>
           <legend>Would you be okay with your photo being used in public media (such as Instagram)?</legend>
-          <label class="checkbox" for="photo_release">
-            <input type="checkbox" id="photo_release" />
+          <label class="checkbox" for="photo-release">
+            <input type="checkbox" name="photo-release" id="photo-release" value="true" />
             Yes, I grant permission to PVD Bike Collective (PBC) to use videos or photographs of me for educational
             purposes or for the promotion of PBC-organized programs.
           </label>
