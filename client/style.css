@@ -56,6 +56,11 @@ button:hover {
   border: 1px solid #a8a8a8;
 }
 
+.invalid-field-warning {
+  box-shadow: 0 0 0.3rem 0.1rem rgba(255, 0, 0, 0.3);
+  border: 0.15rem solid red !important;
+}
+
 #sign-in {
   display: flex;
   flex-direction: column;
@@ -169,16 +174,21 @@ input[type='checkbox']:checked::before {
 
 input[type='text'],
 input[type='tel'] {
-  border: 2px solid #222222;
+  border: 0.15rem solid #222222;
   border-radius: 0.25rem;
   display: grid;
   place-content: center;
   padding: 0.25rem 0.5rem;
 }
 
-input[type='text']:focus-visible {
+input[type='text']:focus-visible,
+input[type='tel']:focus-visible {
   outline: none;
   border-color: #0070ff;
+}
+
+input[required] {
+  scroll-margin-top: 2rem;
 }
 
 #liability-terms-btn {
@@ -247,6 +257,11 @@ input[type='text']:focus-visible {
 
 #modal-checkbox-label {
   margin-top: 1rem;
+}
+
+.error-message {
+  color: #cc0000;
+  font-size: smaller;
 }
 
 /* TODO: mobile first, responsive design */

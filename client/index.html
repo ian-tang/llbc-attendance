@@ -104,7 +104,7 @@
       <h2 class="form-header shadow white-container">Welcome to PVD Bike Collective!</h2>
     </header>
 
-    <form class="shadow white-container" id="sign-in" onsubmit="return false">
+    <form class="shadow white-container" id="sign-in" onsubmit="return false" novalidate>
       <h2 class="form-header">Check in by entering your information</h2>
 
       <section>
@@ -115,6 +115,7 @@
               <label for="first-name">
                 <div>First name: <span class="required" aria-label="required">*</span></div>
                 <input type="text" id="first-name" name="first-name" required />
+                <p class="hidden error-message">This field is required</p>
               </label>
             </div>
             <div class="label-above">
@@ -123,6 +124,7 @@
                   <span>Last name: <span class="required" aria-label="required">*</span></span>
                 </div>
                 <input type="text" id="last-name" name="last-name" required />
+                <p class="hidden error-message">This field is required</p>
               </label>
             </div>
           </div>
@@ -130,6 +132,7 @@
             <label for="phone-number">
               <div>Phone number: <span class="required" aria-label="required">*</span></div>
               <input type="tel" id="phone-number" name="phone-number" placeholder="(555) 555-5555" required />
+              <p class="hidden error-message">This field is required</p>
             </label>
           </div>
         </fieldset>
@@ -180,7 +183,7 @@
             <input type="checkbox" name="liability-waiver" id="liability-waiver" value="true" required />
             <span>
               By checking this box, I certify that I have read, understand, and agree to the terms of PBC's
-              <button role="button" id="liability-terms-btn">Liability Waiver</button>.
+              <button type="button" id="liability-terms-btn">Liability Waiver</button>.
             </span>
           </label>
         </fieldset>
