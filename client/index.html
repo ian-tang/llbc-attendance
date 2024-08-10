@@ -140,33 +140,39 @@
 
       <section>
         <h3 class="check-multiple">What brings you in today?</h3>
-        <fieldset>
+        <fieldset id="visitor-role">
           <legend>
             I am here to: <span class="required" aria-label="required">*</span>
           </legend>
           <ul>
             <li>
               <label class="checkbox" for="role-volunteer">
-                <input type="checkbox" name="role" id="role-volunteer" value="volunteer" />
+                <input type="checkbox" name="visitor-role" id="role-volunteer" value="volunteer" />
                 Volunteer my time and help out
               </label>
             </li>
             <li>
               <label class="checkbox" for="role-get-assistance">
-                <input type="checkbox" name="role" id="role-get-assistance" value="client" />
+                <input type="checkbox" name="visitor-role" id="role-get-assistance" value="get-assistance" />
                 Get assistance with repairing my bike
               </label>
             </li>
             <li>
               <label class="checkbox" for="role-purchase-parts">
-                <input type="checkbox" name="role" id="role-purchase-parts" value="client" />
+                <input type="checkbox" name="visitor-role" id="role-purchase-parts" value="purchase-parts-bikes" />
                 Buy a bike or bike parts
               </label>
             </li>
             <li>
               <label class="checkbox" for="role-donate-parts">
-                <input type="checkbox" name="role" id="role-donate-parts" value="donor" />
+                <input type="checkbox" name="visitor-role" id="role-donate-parts" value="donate-parts-bikes" />
                 Donate a bike or bike parts
+              </label>
+            </li>
+            <li>
+              <label class="checkbox">
+                <div></div>
+                <p class="hidden error-message">Select at least 1 role</p>
               </label>
             </li>
           </ul>
@@ -184,6 +190,7 @@
             <span>
               By checking this box, I certify that I have read, understand, and agree to the terms of PBC's
               <button type="button" id="liability-terms-btn">Liability Waiver</button>.
+              <p class="hidden error-message">Liability waiver is required</p>
             </span>
           </label>
         </fieldset>
@@ -195,31 +202,31 @@
           <ul>
             <li>
               <label class="checkbox" for="interest-mechanics">
-                <input type="checkbox" name="interests" id="interest-mechanics" value="mechanics" />
+                <input type="checkbox" name="interest-areas" id="interest-mechanics" value="mechanics" />
                 Understanding mechanical systems
               </label>
             </li>
             <li>
               <label class="checkbox" for="interest-infrastructure">
-                <input type="checkbox" name="interests" id="interest-infrastructure" value="infrastructure" />
+                <input type="checkbox" name="interest-areas" id="interest-infrastructure" value="infrastructure" />
                 Transit infrastructure
               </label>
             </li>
             <li>
               <label class="checkbox" for="interest-sustainability">
-                <input type="checkbox" name="interests" id="interest-sustainability" value="sustainability" />
+                <input type="checkbox" name="interest-areas" id="interest-sustainability" value="sustainability" />
                 Sustainability
               </label>
             </li>
             <li>
               <label class="checkbox" for="interest-diy">
-                <input type="checkbox" name="interests" id="interest-diy" value="diy" />
+                <input type="checkbox" name="interest-areas" id="interest-diy" value="diy" />
                 DIY
               </label>
             </li>
             <li>
               <label class="checkbox" for="interest-equitability">
-                <input type="checkbox" name="interests" id="interest-equitability" value="equitability" />
+                <input type="checkbox" name="interest-areas" id="interest-equitability" value="equitability" />
                 Social justice and equitability
               </label>
             </li>

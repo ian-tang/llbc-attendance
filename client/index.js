@@ -5,6 +5,13 @@ const VALID_ENTRY = {
   message: '',
 }
 
+const VISITOR_ROLES = new Set([
+  'volunteer',
+  'get-assistance',
+  'purchase-parts-bikes',
+  'donate-parts-bikes',
+])
+
 const VALIDATION_METHODS = {
   'first-name': (value) => {
     if (!value.length)
@@ -60,8 +67,29 @@ const VALIDATION_METHODS = {
 
     return VALID_ENTRY
   },
+
+  'visitor-role': (roles) => {
+    if (roles.length === 0)
+      return {
+        valid: false,
+        message: 'Select at least 1 role',
+      }
+
+    for (const role of roles) {
+      if (!VISITOR_ROLES.has(role)) {
+        return {
+          valid: false,
+          message: 'Contains invalid visitor role',
+        }
+      }
+    }
+
+    return VALID_ENTRY
+  },
 }
 
+// TODO: major refactoring needed
+// probably should split into multiple files
 document.onreadystatechange = () => {
   if (document.readyState === 'interactive') {
     const showWaiverButton = document.getElementById('liability-terms-btn')
@@ -77,7 +105,9 @@ document.onreadystatechange = () => {
       overlay.className = 'hidden'
       modal.className = 'hidden'
 
-      mainFormCheckbox.checked = modalCheckbox.checked
+      modalCheckbox.checked
+        ? mainFormCheckbox.click()
+        : (mainFormCheckbox.checked = false)
     }
 
     const showModal = () => {
@@ -100,45 +130,22 @@ document.onreadystatechange = () => {
 
     document.getElementById('submit-btn').addEventListener('click', (event) => {
       event.preventDefault()
-      const formFields = {
-        'first-name': undefined,
-        'last-name': undefined,
-        'phone-number': undefined,
-        'liability-waiver': undefined,
-      }
-      const data = new FormData(signInForm)
+
+      const formFields = getCurrentFormValues(signInForm)
       let isFormValid = true
 
-      for (const [name, value] of data) {
-        formFields[name] = value
-      }
-      for (const [name, value] of Object.entries(formFields)) {
-        const validationResult = VALIDATION_METHODS[name]?.(value)
-        if (validationResult && !validationResult.valid) {
-          const el = document.getElementById(name)
-
-          // scrolls into view only for 1st invalid field
-          if (isFormValid) el.scrollIntoView({ behavior: 'smooth' })
+      const fieldsets = signInForm.getElementsByTagName('fieldset')
+      for (let i = 0; i < fieldsets.length; i++) {
+        if (displayErrorMessagesWithin(fieldsets[i], signInForm)) {
+          isFormValid && fieldsets[i].scrollIntoView({ behavior: 'smooth' })
           isFormValid = false
-
-          el.classList.add('invalid-field-warning')
-          if (el.nextElementSibling.classList.contains('error-message')) {
-            el.nextElementSibling.classList.remove('hidden')
-            el.nextElementSibling.innerHTML = validationResult.message
-          }
-
-          el.addEventListener('input', () => {
-            if (VALIDATION_METHODS[name](el.value).valid === true) {
-              el.classList.remove('invalid-field-warning')
-              if (el.nextElementSibling.classList.contains('error-message')) {
-                el.nextElementSibling.classList.add('hidden')
-              }
-            }
-          })
         }
       }
 
       console.log('form is complete:', isFormValid)
+      for (const [name, value] of Object.entries(formFields)) {
+        console.log(name, value)
+      }
 
       if (isFormValid) signInForm.requestSubmit()
     })
@@ -147,4 +154,98 @@ document.onreadystatechange = () => {
       console.log('submitted')
     })
   }
+}
+
+function displayErrorMessagesWithin(el, formRef) {
+  const inputs = el.getElementsByTagName('input')
+  const errorMessages = el.getElementsByClassName('error-message')
+
+  const validateAllFields = (formData) => {
+    let isValidFieldset = true
+    for (let i = 0; i < inputs.length; i++) {
+      if (
+        VALIDATION_METHODS[inputs[i].name] !== undefined &&
+        VALIDATION_METHODS[inputs[i].name](formData[inputs[i].name]).valid ===
+          false
+      )
+        isValidFieldset = false
+    }
+    return isValidFieldset
+  }
+
+  const formData = getCurrentFormValues(formRef)
+  for (let i = 0; i < inputs.length; i++) {
+    const requiresValidation = VALIDATION_METHODS[inputs[i].name] !== undefined
+    const isValidField =
+      requiresValidation &&
+      VALIDATION_METHODS[inputs[i].name](formData[inputs[i].name]).valid ===
+        true
+    if (
+      !isValidField &&
+      inputs[i].nextElementSibling &&
+      inputs[i].nextElementSibling.classList.contains('error-message')
+    ) {
+      inputs[i].nextElementSibling.classList.remove('hidden')
+      inputs[i].addEventListener('input', () => {
+        const updatedForm = getCurrentFormValues(formRef)
+        const isNowValid =
+          VALIDATION_METHODS[inputs[i].name](updatedForm[inputs[i].name])
+            .valid === true
+
+        if (isNowValid) inputs[i].nextElementSibling.classList.add('hidden')
+      })
+    }
+
+    if (!validateAllFields(formData)) {
+      el.classList.add('invalid-field-warning')
+      if (
+        errorMessages.length === 1 &&
+        errorMessages[0].previousElementSibling &&
+        errorMessages[0].previousElementSibling.tagName !== 'INPUT'
+      )
+        errorMessages[0].classList.remove('hidden')
+    }
+
+    el.addEventListener('input', () => {
+      if (validateAllFields(getCurrentFormValues(formRef)))
+        el.classList.remove('invalid-field-warning')
+      if (
+        errorMessages.length === 1 &&
+        errorMessages[0].previousElementSibling &&
+        errorMessages[0].previousElementSibling.tagName !== 'INPUT'
+      )
+        errorMessages[0].classList.add('hidden')
+    })
+  }
+
+  return !validateAllFields(formData)
+}
+
+// map FormData onto formFields
+function getCurrentFormValues(form) {
+  // define expected fields in form
+  // necessary because FormData will not include entries
+  // for unchecked checkboxes
+  const fields = {
+    'first-name': undefined,
+    'last-name': undefined,
+    'phone-number': undefined,
+    'visitor-role': [],
+    'liability-waiver': undefined,
+    'interest-areas': [],
+    'photo-release': undefined,
+  }
+
+  const data = new FormData(form)
+
+  for (const [name, value] of data) {
+    if (Array.isArray(fields[name])) {
+      fields[name].push(value)
+      continue
+    }
+
+    fields[name] = value
+  }
+
+  return fields
 }
