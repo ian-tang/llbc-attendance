@@ -228,8 +228,8 @@ input[required] {
 #modal {
   display: flex;
   position: fixed;
-  transform: translateY(15vh);
-  transform-origin: top;
+  top: 50%;
+  transform: translateY(-50%);
   width: 90vw;
   max-width: 800px;
   height: 90vh;
