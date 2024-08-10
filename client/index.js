@@ -105,9 +105,8 @@ document.onreadystatechange = () => {
       overlay.className = 'hidden'
       modal.className = 'hidden'
 
-      modalCheckbox.checked
-        ? mainFormCheckbox.click()
-        : (mainFormCheckbox.checked = false)
+      if (modalCheckbox.checked !== mainFormCheckbox.checked)
+        mainFormCheckbox.click()
     }
 
     const showModal = () => {
