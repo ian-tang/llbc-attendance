@@ -175,16 +175,16 @@ function displayErrorMessagesWithin(el, formRef) {
   const formData = getCurrentFormValues(formRef)
   for (let i = 0; i < inputs.length; i++) {
     const requiresValidation = VALIDATION_METHODS[inputs[i].name] !== undefined
-    const isValidField =
+    const validationResult =
       requiresValidation &&
-      VALIDATION_METHODS[inputs[i].name](formData[inputs[i].name]).valid ===
-        true
+      VALIDATION_METHODS[inputs[i].name](formData[inputs[i].name])
     if (
-      !isValidField &&
+      !validationResult.valid === true &&
       inputs[i].nextElementSibling &&
       inputs[i].nextElementSibling.classList.contains('error-message')
     ) {
       inputs[i].nextElementSibling.classList.remove('hidden')
+      inputs[i].nextElementSibling.innerHTML = validationResult.message
       inputs[i].addEventListener('input', () => {
         const updatedForm = getCurrentFormValues(formRef)
         const isNowValid =
