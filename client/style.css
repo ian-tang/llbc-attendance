@@ -109,6 +109,7 @@ ul.invalid-field-warning {
 
 .name-fields {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   gap: 1rem;
@@ -276,6 +277,9 @@ input[required] {
 /* 	large: 1440x1024 */
 
 @media only screen and (min-width: 576px) {
+  .name-fields {
+    flex-direction: row;
+  }
 }
 
 @media only screen and (min-width: 992px) {
