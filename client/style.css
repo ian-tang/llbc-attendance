@@ -7,8 +7,8 @@ body {
   justify-content: start;
   align-items: center;
   width: 100vw;
+  min-width: 320px;
   height: 100vh;
-  background: rgb(218, 167, 233);
   background: linear-gradient(
     90deg,
     rgba(218, 167, 233, 1) 0%,
@@ -23,6 +23,10 @@ body {
 
 ul {
   padding: 0;
+}
+
+fieldset ul li + li {
+  margin-top: 0.3rem;
 }
 
 li {
@@ -76,7 +80,6 @@ ul.invalid-field-warning {
   padding: 1.5rem;
   gap: 1.5rem;
   max-width: 40rem;
-  min-width: 280px;
 }
 
 #sign-in section {
@@ -112,7 +115,7 @@ ul.invalid-field-warning {
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .personal-info {
@@ -279,6 +282,7 @@ input[required] {
 @media only screen and (min-width: 576px) {
   .name-fields {
     flex-direction: row;
+    gap: 1rem;
   }
 }
 
