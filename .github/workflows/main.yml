@@ -13,8 +13,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Add execute permissions to script
+      run: chmod +x ./deploy_to_griefbox.sh
+
     - name: Run the script with secrets
-      run: bash deploy_to_griefbox.sh
+      run: bash ./deploy_to_griefbox.sh
       env:
         SSH_USERNAME: ${{ secrets.GRIEFBOX_SSH_USERNAME }}
         SSH_HOST: ${{ secrets.GRIEFBOX_SSH_HOST }}
