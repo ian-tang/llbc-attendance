@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - 'feature/*'
 
 jobs:
   run-script:
@@ -17,4 +16,6 @@ jobs:
     - name: Run the script with secrets
       run: bash deploy_to_griefbox.sh
       env:
-        SSH_PASSWORD: ${{ secrets.GRIEFBOX_SSH_PASSWORD }}
+        SSH_USERNAME: ${{ secrets.GRIEFBOX_SSH_USERNAME }}
+        SSH_HOST: ${{ secrets.GRIEFBOX_SSH_HOST }}
+        SSH_KEY: ${{ secrets.GRIEFBOX_SSH_KEY_ECDSA }}
