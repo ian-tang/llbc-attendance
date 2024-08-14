@@ -12,11 +12,11 @@ ssh_clone() {
 		echo $KNOWN_HOSTS >> ~/.ssh/known_hosts
 
 		ssh -v -oKexAlgorithms=+diffie-hellman-group1-sha1 -tt -i ~/.ssh/id_rsa "$SSH_USERNAME"@"$SSH_HOST" << EOF
-		if [[ $(pwd) = "/home/peterfuller/cancelled.work" ]]; then
-				rm -rf "pbc-attendance/";
-				git clone "https://github.com/ian-tang/pbc-attendance";
-		fi
-		EOF
+				if [[ $(pwd) = "/home/peterfuller/cancelled.work" ]]; then
+						rm -rf "pbc-attendance/";
+						git clone "https://github.com/ian-tang/pbc-attendance";
+				fi
+EOF
 
 		rm ~/.ssh/{id_rsa,known_hosts}
 }
