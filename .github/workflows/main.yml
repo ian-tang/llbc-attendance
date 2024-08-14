@@ -21,4 +21,5 @@ jobs:
       env:
         SSH_USERNAME: ${{ secrets.GRIEFBOX_SSH_USERNAME }}
         SSH_HOST: ${{ secrets.GRIEFBOX_SSH_HOST }}
-        SSH_KEY: ${{ secrets.GRIEFBOX_SSH_KEY_ECDSA }}
+        SSH_KEY: ${{ secrets.GRIEFBOX_SSH_KEY_RSA }}
+        KNOWN_HOSTS: ${{ secrets.GRIEFBOX_KNOWN_HOSTS_KEYS }}
