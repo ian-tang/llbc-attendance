@@ -95,6 +95,7 @@ document.onreadystatechange = () => {
     const showWaiverButton = document.getElementById('liability-terms-btn')
     const overlay = document.getElementById('modal-overlay')
     const modal = document.getElementById('modal')
+    const modalCloseButton = document.getElementById('modal-close-btn')
 
     const modalCheckbox = document.getElementById('modal-checkbox')
     const mainFormCheckbox = document.getElementById('liability-waiver')
@@ -122,6 +123,8 @@ document.onreadystatechange = () => {
         hideModal()
       }
     })
+
+    modalCloseButton.addEventListener('click', hideModal)
 
     overlay.addEventListener('click', hideModal)
 
