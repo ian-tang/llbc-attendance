@@ -3,7 +3,7 @@ name: Run Script on Push
 on: 
   push:
     branches:
-      - main
+      - '*'
 
 jobs:
   run-script:
@@ -13,13 +13,23 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Add execute permissions to script
-      run: chmod +x ./.github/workflows/deploy_to_griefbox.sh
-
-    - name: Run the script with secrets
-      run: bash ./.github/workflows/deploy_to_griefbox.sh
+    - name: Set up secrets and ssh config
       env:
-        SSH_USERNAME: ${{ secrets.GRIEFBOX_SSH_USERNAME }}
-        SSH_HOST: ${{ secrets.GRIEFBOX_SSH_HOST }}
-        SSH_KEY: ${{ secrets.GRIEFBOX_SSH_KEY_RSA }}
-        KNOWN_HOSTS: ${{ secrets.GRIEFBOX_KNOWN_HOSTS_KEYS }}
+        SSH_CONFIG: ${{ secrets.GRIEFBOX_SSH_CONFIG }}
+        SSH_KEY: ${{ secrets.GRIEFBOX_SSH_KEY_ECDSA }}
+        SSH_KNOWN_HOSTS: ${{ secrets.GRIEFBOX_KNOWN_HOSTS_KEYS}}
+      run: |
+        cp .github/workflows/deploy_to_griefbox.sh .
+        touch ./known_hosts ./id_ecdsa ./config
+        chmod 600 ./known_hosts ./id_ecdsa ./config
+        echo $SSH_KNOWN_HOSTS >> ./known_hosts
+        echo -e "$SSH_KEY" >> ./id_ecdsa
+        echo $SSH_CONFIG >> ./config
+
+    - name: Build Docker image
+      run: |
+        docker build -f .github/workflows/Dockerfile -t deploy_to_griefbox .
+
+    - name: Run Docker container
+      run: |
+        docker run --rm deploy_to_griefbox
