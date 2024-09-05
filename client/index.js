@@ -1,5 +1,13 @@
 'use strict'
 
+/**
+ * Object returned by a validation method
+ * @typedef {object} ValidationResponse
+ * @property {boolean} valid
+ * @property {string} message
+ */
+
+/** @type {ValidationResponse} */
 const VALID_ENTRY = {
   valid: true,
   message: '',
@@ -13,6 +21,9 @@ const VISITOR_ROLES = new Set([
 ])
 
 const VALIDATION_METHODS = {
+  /**
+   * @param {string} value
+   */
   'first-name': (value) => {
     if (!value.length)
       return {
@@ -28,6 +39,9 @@ const VALIDATION_METHODS = {
     return VALID_ENTRY
   },
 
+  /**
+   * @param {string} value
+   */
   'last-name': (value) => {
     if (!value.length)
       return {
@@ -43,6 +57,9 @@ const VALIDATION_METHODS = {
     return VALID_ENTRY
   },
 
+  /**
+   * @param {string} value
+   */
   'phone-number': (value) => {
     if (value.length === 0)
       return {
@@ -58,6 +75,9 @@ const VALIDATION_METHODS = {
     return VALID_ENTRY
   },
 
+  /**
+   * @param {boolean} value
+   */
   'liability-waiver': (value) => {
     if (value !== true)
       return {
@@ -68,6 +88,9 @@ const VALIDATION_METHODS = {
     return VALID_ENTRY
   },
 
+  /**
+   * @param {Array.<string>} roles
+   */
   'visitor-role': (roles) => {
     if (roles.length === 0)
       return {
@@ -88,8 +111,6 @@ const VALIDATION_METHODS = {
   },
 }
 
-// TODO: major refactoring needed
-// probably should split into multiple files
 document.onreadystatechange = () => {
   if (document.readyState === 'interactive') {
     const showWaiverButton = document.getElementById('liability-terms-btn')
@@ -102,6 +123,9 @@ document.onreadystatechange = () => {
 
     const signInForm = document.getElementById('sign-in')
 
+    /**
+     * Hides the modal
+     */
     const hideModal = () => {
       overlay.className = 'hidden'
       modal.className = 'hidden'
@@ -110,6 +134,9 @@ document.onreadystatechange = () => {
         mainFormCheckbox.click()
     }
 
+    /**
+     * Shows the modal
+     */
     const showModal = () => {
       overlay.className = ''
       modal.className = ''
@@ -134,28 +161,33 @@ document.onreadystatechange = () => {
       event.preventDefault()
 
       const formFields = getCurrentFormValues(signInForm)
-      let isFormValid = true
+      let isValid = true
 
       const fieldsets = signInForm.getElementsByTagName('fieldset')
       for (let i = 0; i < fieldsets.length; i++) {
-        if (displayErrorMessagesWithin(fieldsets[i], signInForm)) {
-          isFormValid && fieldsets[i].scrollIntoView({ behavior: 'smooth' })
-          isFormValid = false
+        if (!isValidFieldset(fieldsets[i], getCurrentFormValues(signInForm))) {
+          displayErrorMessagesWithin(fieldsets[i], signInForm)
+          isValid && fieldsets[i].scrollIntoView({ behavior: 'smooth' })
+          isValid = false
         }
       }
 
-      console.log('form is complete:', isFormValid)
+      console.log('form is complete:', isValid)
       for (const [name, value] of Object.entries(formFields)) {
         console.log(name, value)
       }
 
-      if (isFormValid) signInForm.requestSubmit()
+      if (isValid) signInForm.requestSubmit()
     })
 
     signInForm.addEventListener('submit', submitSignInForm)
   }
 }
 
+/**
+ * @async
+ * @param {SubmitEvent} event
+ */
 async function submitSignInForm(event) {
   const formData = getCurrentFormValues(event.target)
   console.log(formData)
@@ -163,6 +195,10 @@ async function submitSignInForm(event) {
   console.log('submitted')
 }
 
+/**
+ * @async
+ * @param {FormValues} formData - Form values as a JS object
+ */
 async function postFormData(formData) {
   const endpoint = 'http://localhost:8090/submit'
   try {
@@ -179,22 +215,33 @@ async function postFormData(formData) {
   }
 }
 
+/**
+ * @param {HTMLFieldSetElement} el - Fieldset element
+ * @param {FormValues} formData - current form values
+ */
+function isValidFieldset(el, formData) {
+  const inputs = el.getElementsByTagName('input')
+  let isValidFieldset = true
+
+  for (let i = 0; i < inputs.length; i++) {
+    const fieldName = inputs[i].name
+    if (
+      VALIDATION_METHODS[fieldName] &&
+      !VALIDATION_METHODS[fieldName](formData[fieldName]).valid
+    )
+      isValidFieldset = false
+  }
+
+  return isValidFieldset
+}
+
+/**
+ * @param {HTMLElement} el - Element to be checked for errors
+ * @param {HTMLFormElement} formRef - Enclosing form element
+ */
 function displayErrorMessagesWithin(el, formRef) {
   const inputs = el.getElementsByTagName('input')
   const errorMessages = el.getElementsByClassName('error-message')
-
-  const validateAllFields = (formData) => {
-    let isValidFieldset = true
-    for (let i = 0; i < inputs.length; i++) {
-      if (
-        VALIDATION_METHODS[inputs[i].name] !== undefined &&
-        VALIDATION_METHODS[inputs[i].name](formData[inputs[i].name]).valid ===
-          false
-      )
-        isValidFieldset = false
-    }
-    return isValidFieldset
-  }
 
   const formData = getCurrentFormValues(formRef)
   for (let i = 0; i < inputs.length; i++) {
@@ -219,7 +266,7 @@ function displayErrorMessagesWithin(el, formRef) {
       })
     }
 
-    if (!validateAllFields(formData)) {
+    if (!isValidFieldset(el, formData)) {
       el.classList.add('invalid-field-warning')
       if (
         errorMessages.length === 1 &&
@@ -230,7 +277,7 @@ function displayErrorMessagesWithin(el, formRef) {
     }
 
     el.addEventListener('input', () => {
-      if (validateAllFields(getCurrentFormValues(formRef)))
+      if (isValidFieldset(el, getCurrentFormValues(formRef)))
         el.classList.remove('invalid-field-warning')
       if (
         errorMessages.length === 1 &&
@@ -240,15 +287,26 @@ function displayErrorMessagesWithin(el, formRef) {
         errorMessages[0].classList.add('hidden')
     })
   }
-
-  return !validateAllFields(formData)
 }
 
-// map FormData onto formFields
+/**
+ * A JS object with properties mapping to form values
+ * @typedef {object} FormValues
+ * @property {string} first-name
+ * @property {string} last-name
+ * @property {string} phone-number
+ * @property {Array.<string>} visitor-roles
+ * @property {boolean} liability-waiver
+ * @property {boolean} photo-release
+ */
+
+/**
+ * Returns form values in a JS object
+ * @param {HTMLFormElement} form - HTMLFormElement
+ * @returns {FormValues} JS object containing form values
+ */
 function getCurrentFormValues(form) {
-  // define expected fields in form
-  // necessary because FormData will not include entries
-  // for unchecked checkboxes
+  /** @type {FormValues} */
   const fields = {
     'first-name': '',
     'last-name': '',
@@ -266,7 +324,7 @@ function getCurrentFormValues(form) {
       continue
     }
 
-    fields[name] = value === 'true' ? true : value
+    fields[name] = value === 'true' || value
   }
 
   return fields
