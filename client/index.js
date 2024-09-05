@@ -59,7 +59,7 @@ const VALIDATION_METHODS = {
   },
 
   'liability-waiver': (value) => {
-    if (value !== 'true')
+    if (value !== true)
       return {
         valid: false,
         message: 'Liability waiver is required',
@@ -152,9 +152,30 @@ document.onreadystatechange = () => {
       if (isFormValid) signInForm.requestSubmit()
     })
 
-    signInForm.addEventListener('submit', (event) => {
-      console.log('submitted')
+    signInForm.addEventListener('submit', submitSignInForm)
+  }
+}
+
+async function submitSignInForm(event) {
+  const formData = getCurrentFormValues(event.target)
+  console.log(formData)
+  await postFormData(formData)
+  console.log('submitted')
+}
+
+async function postFormData(formData) {
+  const endpoint = 'http://localhost:8090/submit'
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: new Headers().append('Content-Type', 'application/json'),
     })
+
+    const json = await res.json()
+    console.log(json)
+  } catch (e) {
+    console.log(e)
   }
 }
 
@@ -229,13 +250,12 @@ function getCurrentFormValues(form) {
   // necessary because FormData will not include entries
   // for unchecked checkboxes
   const fields = {
-    'first-name': undefined,
-    'last-name': undefined,
-    'phone-number': undefined,
+    'first-name': '',
+    'last-name': '',
+    'phone-number': '',
     'visitor-role': [],
-    'liability-waiver': undefined,
-    'interest-areas': [],
-    'photo-release': undefined,
+    'liability-waiver': false,
+    'photo-release': false,
   }
 
   const data = new FormData(form)
@@ -246,7 +266,7 @@ function getCurrentFormValues(form) {
       continue
     }
 
-    fields[name] = value
+    fields[name] = value === 'true' ? true : value
   }
 
   return fields
