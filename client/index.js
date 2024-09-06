@@ -1,4 +1,4 @@
-'use strict'
+import { postFormData } from './src/service/api.js'
 
 /**
  * Object returned by a validation method
@@ -129,7 +129,10 @@ const VALIDATION_METHODS = {
 }
 
 document.onreadystatechange = () => {
-  if (document.readyState === 'interactive') {
+  if (
+    document.readyState === 'interactive' ||
+    document.readyState === 'complete'
+  ) {
     const showWaiverButton = document.getElementById('liability-terms-btn')
     const overlay = document.getElementById('modal-overlay')
     const modal = document.getElementById('modal')
@@ -210,27 +213,6 @@ async function submitSignInForm(event) {
   console.log(formData)
   await postFormData(formData)
   console.log('submitted')
-}
-
-/**
- * Makes a post request with the form data in JSON form
- * @async
- * @param {FormValues} formData - Form values as a JS object
- */
-async function postFormData(formData) {
-  const endpoint = 'http://localhost:8090/submit'
-  try {
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: new Headers().append('Content-Type', 'application/json'),
-    })
-
-    const json = await res.json()
-    console.log(json)
-  } catch (e) {
-    console.log(e)
-  }
 }
 
 /**
