@@ -113,6 +113,19 @@ const VALIDATION_METHODS = {
 
     return VALID_ENTRY
   },
+
+  /**
+   * @param {boolean} value If the photo release checkbox is checked
+   */
+  'photo-release': (value) => {
+    if (typeof value !== 'boolean')
+      return {
+        valid: false,
+        message: 'Value must be either true or false',
+      }
+
+    return VALID_ENTRY
+  },
 }
 
 document.onreadystatechange = () => {
@@ -257,7 +270,7 @@ function displayErrorMessagesWithin(el, formRef) {
       requiresValidation &&
       VALIDATION_METHODS[inputs[i].name](formData[inputs[i].name])
     if (
-      !validationResult.valid === true &&
+      !validationResult.valid &&
       inputs[i].nextElementSibling &&
       inputs[i].nextElementSibling.classList.contains('error-message')
     ) {
@@ -265,9 +278,9 @@ function displayErrorMessagesWithin(el, formRef) {
       inputs[i].nextElementSibling.innerHTML = validationResult.message
       inputs[i].addEventListener('input', () => {
         const updatedForm = getCurrentFormValues(formRef)
-        const isNowValid =
-          VALIDATION_METHODS[inputs[i].name](updatedForm[inputs[i].name])
-            .valid === true
+        const isNowValid = VALIDATION_METHODS[inputs[i].name](
+          updatedForm[inputs[i].name],
+        ).valid
 
         if (isNowValid) inputs[i].nextElementSibling.classList.add('hidden')
       })
