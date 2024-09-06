@@ -20,9 +20,13 @@ const VISITOR_ROLES = new Set([
   'donate-parts-bikes',
 ])
 
+/**
+ * An object containing properties which map to validation methods
+ * for each input field on the form
+ */
 const VALIDATION_METHODS = {
   /**
-   * @param {string} value
+   * @param {string} value First name
    */
   'first-name': (value) => {
     if (!value.length)
@@ -40,7 +44,7 @@ const VALIDATION_METHODS = {
   },
 
   /**
-   * @param {string} value
+   * @param {string} value Last name
    */
   'last-name': (value) => {
     if (!value.length)
@@ -58,7 +62,7 @@ const VALIDATION_METHODS = {
   },
 
   /**
-   * @param {string} value
+   * @param {string} value A string value representing a phone number
    */
   'phone-number': (value) => {
     if (value.length === 0)
@@ -76,7 +80,7 @@ const VALIDATION_METHODS = {
   },
 
   /**
-   * @param {boolean} value
+   * @param {boolean} value If the liability waiver checkbox is checked
    */
   'liability-waiver': (value) => {
     if (value !== true)
@@ -89,7 +93,7 @@ const VALIDATION_METHODS = {
   },
 
   /**
-   * @param {Array.<string>} roles
+   * @param {Array.<string>} roles An array of visitor roles that are checked
    */
   'visitor-role': (roles) => {
     if (roles.length === 0)
@@ -196,6 +200,7 @@ async function submitSignInForm(event) {
 }
 
 /**
+ * Makes a post request with the form data in JSON form
  * @async
  * @param {FormValues} formData - Form values as a JS object
  */
@@ -216,6 +221,7 @@ async function postFormData(formData) {
 }
 
 /**
+ * Performs validation checks on input fields within a fieldset element
  * @param {HTMLFieldSetElement} el - Fieldset element
  * @param {FormValues} formData - current form values
  */
@@ -236,6 +242,7 @@ function isValidFieldset(el, formData) {
 }
 
 /**
+ * Displays error messages on descendant input elements
  * @param {HTMLElement} el - Element to be checked for errors
  * @param {HTMLFormElement} formRef - Enclosing form element
  */
