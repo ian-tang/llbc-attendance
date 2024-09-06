@@ -1,4 +1,4 @@
-import { postFormData } from './src/service/api.js'
+import { postFormData } from './api.js'
 
 /**
  * Object returned by a validation method
