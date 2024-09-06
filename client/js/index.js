@@ -297,7 +297,7 @@ function displayErrorMessagesWithin(el, formRef) {
  * @property {string} first-name
  * @property {string} last-name
  * @property {string} phone-number
- * @property {Array.<string>} visitor-roles
+ * @property {Array.<string>} visitor-role
  * @property {boolean} liability-waiver
  * @property {boolean} photo-release
  */
