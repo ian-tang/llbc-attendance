@@ -133,6 +133,7 @@ document.onreadystatechange = () => {
     document.readyState === 'interactive' ||
     document.readyState === 'complete'
   ) {
+    // check for necessary DOM elements
     const showWaiverButton = document.getElementById('liability-terms-btn')
     const overlay = document.getElementById('modal-overlay')
     const modal = document.getElementById('modal')
@@ -142,10 +143,52 @@ document.onreadystatechange = () => {
     const mainFormCheckbox = document.getElementById('liability-waiver')
 
     const signInForm = document.getElementById('sign-in')
+    const formSubmitButton = document.getElementById('submit-btn')
 
-    /**
-     * Hides the modal
-     */
+    const requiredElements = [
+      showWaiverButton,
+      overlay,
+      modal,
+      modalCloseButton,
+      modalCheckbox,
+      mainFormCheckbox,
+      signInForm,
+      formSubmitButton,
+    ]
+
+    if (!requiredElements.some((el) => el === null))
+      attachPageEventListeners(
+        showWaiverButton,
+        overlay,
+        modal,
+        modalCloseButton,
+        modalCheckbox,
+        mainFormCheckbox,
+        signInForm,
+        formSubmitButton,
+      )
+  }
+
+  /**
+   * @param {HTMLButtonElement} showWaiverButton
+   * @param {HTMLDivElement} overlay
+   * @param {HTMLElement} modal
+   * @param {HTMLButtonElement} modalCloseButton
+   * @param {HTMLInputElement} modalCheckbox
+   * @param {HTMLInputElement} mainFormCheckbox
+   * @param {HTMLFormElement} signInForm
+   * @param {HTMLButtonElement} formSubmitButton
+   */
+  function attachPageEventListeners(
+    showWaiverButton,
+    overlay,
+    modal,
+    modalCloseButton,
+    modalCheckbox,
+    mainFormCheckbox,
+    signInForm,
+    formSubmitButton,
+  ) {
     const hideModal = () => {
       overlay.className = 'hidden'
       modal.className = 'hidden'
@@ -154,9 +197,6 @@ document.onreadystatechange = () => {
         mainFormCheckbox.click()
     }
 
-    /**
-     * Shows the modal
-     */
     const showModal = () => {
       overlay.className = ''
       modal.className = ''
@@ -177,7 +217,7 @@ document.onreadystatechange = () => {
 
     showWaiverButton.addEventListener('click', showModal)
 
-    document.getElementById('submit-btn').addEventListener('click', (event) => {
+    formSubmitButton.addEventListener('click', (event) => {
       event.preventDefault()
 
       const formFields = getCurrentFormValues(signInForm)
