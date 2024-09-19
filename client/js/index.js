@@ -348,17 +348,6 @@ function displayErrorMessagesWithin(el, formRef) {
 }
 
 /**
- * A JS object with properties mapping to form values
- * @typedef {object} FormValues
- * @property {string} first-name
- * @property {string} last-name
- * @property {string} phone-number
- * @property {Array.<string>} visitor-role
- * @property {boolean} liability-waiver
- * @property {boolean} photo-release
- */
-
-/**
  * Returns form values in a JS object
  * @param {HTMLFormElement} form - HTMLFormElement
  * @returns {FormValues} JS object containing form values
