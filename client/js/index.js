@@ -128,24 +128,51 @@ const VALIDATION_METHODS = {
   },
 }
 
+/**
+ * @typedef {object} RequiredElements
+ * @property {HTMLButtonElement} showWaiverButton
+ * @property {HTMLDivElement} overlay
+ * @property {HTMLElement} modal
+ * @property {HTMLButtonElement} modalCloseButton
+ * @property {HTMLInputElement} modalCheckbox
+ * @property {HTMLInputElement} mainFormCheckbox
+ * @property {HTMLFormElement} signInForm
+ * @property {HTMLButtonElement} formSubmitButton
+ */
+
 document.onreadystatechange = () => {
   if (
     document.readyState === 'interactive' ||
     document.readyState === 'complete'
   ) {
     // check for necessary DOM elements
-    const showWaiverButton = document.getElementById('liability-terms-btn')
-    const overlay = document.getElementById('modal-overlay')
-    const modal = document.getElementById('modal')
-    const modalCloseButton = document.getElementById('modal-close-btn')
+    const showWaiverButton = /** @type HTMLButtonElement */ (
+      document.getElementById('liability-terms-btn')
+    )
+    const overlay = /** @type HTMLDivElement */ (
+      document.getElementById('modal-overlay')
+    )
+    const modal = /** @type HTMLElement */ (document.getElementById('modal'))
+    const modalCloseButton = /** @type HTMLButtonElement */ (
+      document.getElementById('modal-close-btn')
+    )
 
-    const modalCheckbox = document.getElementById('modal-checkbox')
-    const mainFormCheckbox = document.getElementById('liability-waiver')
+    const modalCheckbox = /** @type HTMLInputElement */ (
+      document.getElementById('modal-checkbox')
+    )
+    const mainFormCheckbox = /** @type HTMLInputElement */ (
+      document.getElementById('liability-waiver')
+    )
 
-    const signInForm = document.getElementById('sign-in')
-    const formSubmitButton = document.getElementById('submit-btn')
+    const signInForm = /** @type HTMLFormElement */ (
+      document.getElementById('sign-in')
+    )
+    const formSubmitButton = /** @type HTMLButtonElement */ (
+      document.getElementById('submit-btn')
+    )
 
-    const requiredElements = [
+    /** @type RequiredElements */
+    const requiredElements = {
       showWaiverButton,
       overlay,
       modal,
@@ -154,32 +181,16 @@ document.onreadystatechange = () => {
       mainFormCheckbox,
       signInForm,
       formSubmitButton,
-    ]
+    }
 
-    if (!requiredElements.some((el) => el === null))
-      attachPageEventListeners(
-        showWaiverButton,
-        overlay,
-        modal,
-        modalCloseButton,
-        modalCheckbox,
-        mainFormCheckbox,
-        signInForm,
-        formSubmitButton,
-      )
+    if (!Object.values(requiredElements).some((el) => el === null))
+      attachPageEventListeners(requiredElements)
   }
 
   /**
-   * @param {HTMLButtonElement} showWaiverButton
-   * @param {HTMLDivElement} overlay
-   * @param {HTMLElement} modal
-   * @param {HTMLButtonElement} modalCloseButton
-   * @param {HTMLInputElement} modalCheckbox
-   * @param {HTMLInputElement} mainFormCheckbox
-   * @param {HTMLFormElement} signInForm
-   * @param {HTMLButtonElement} formSubmitButton
+   * @param {RequiredElements} requiredElements
    */
-  function attachPageEventListeners(
+  function attachPageEventListeners({
     showWaiverButton,
     overlay,
     modal,
@@ -188,7 +199,7 @@ document.onreadystatechange = () => {
     mainFormCheckbox,
     signInForm,
     formSubmitButton,
-  ) {
+  }) {
     const hideModal = () => {
       overlay.className = 'hidden'
       modal.className = 'hidden'
@@ -249,10 +260,14 @@ document.onreadystatechange = () => {
  * @param {SubmitEvent} event
  */
 async function submitSignInForm(event) {
-  const formData = getCurrentFormValues(event.target)
-  console.log(formData)
-  await postFormData(formData)
-  console.log('submitted')
+  if (event.target !== null) {
+    const formData = getCurrentFormValues(
+      /** @type HTMLFormElement */ (event.target),
+    )
+    console.log(formData)
+    await postFormData(formData)
+    console.log('submitted')
+  }
 }
 
 /**
@@ -278,7 +293,7 @@ function isValidFieldset(el, formData) {
 
 /**
  * Displays error messages on descendant input elements
- * @param {HTMLElement} el - Element to be checked for errors
+ * @param {HTMLFieldSetElement} el - Element to be checked for errors
  * @param {HTMLFormElement} formRef - Enclosing form element
  */
 function displayErrorMessagesWithin(el, formRef) {
@@ -291,20 +306,21 @@ function displayErrorMessagesWithin(el, formRef) {
     const validationResult =
       requiresValidation &&
       VALIDATION_METHODS[inputs[i].name](formData[inputs[i].name])
+    const errorMessageRef = inputs[i].nextElementSibling
     if (
       !validationResult.valid &&
-      inputs[i].nextElementSibling &&
-      inputs[i].nextElementSibling.classList.contains('error-message')
+      errorMessageRef !== null &&
+      errorMessageRef.classList.contains('error-message')
     ) {
-      inputs[i].nextElementSibling.classList.remove('hidden')
-      inputs[i].nextElementSibling.innerHTML = validationResult.message
+      errorMessageRef.classList.remove('hidden')
+      errorMessageRef.innerHTML = validationResult.message
       inputs[i].addEventListener('input', () => {
         const updatedForm = getCurrentFormValues(formRef)
         const isNowValid = VALIDATION_METHODS[inputs[i].name](
           updatedForm[inputs[i].name],
         ).valid
 
-        if (isNowValid) inputs[i].nextElementSibling.classList.add('hidden')
+        if (isNowValid) errorMessageRef.classList.add('hidden')
       })
     }
 
