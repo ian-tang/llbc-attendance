@@ -19,30 +19,16 @@ document.onreadystatechange = () => {
     document.readyState === 'complete'
   ) {
     // check for necessary DOM elements
-    const showWaiverButton = /** @type HTMLButtonElement */ (
-      document.getElementById('liability-terms-btn')
-    )
-    const overlay = /** @type HTMLDivElement */ (
-      document.getElementById('modal-overlay')
-    )
-    const modal = /** @type HTMLElement */ (document.getElementById('modal'))
-    const modalCloseButton = /** @type HTMLButtonElement */ (
-      document.getElementById('modal-close-btn')
-    )
+    const showWaiverButton = document.getElementById('liability-terms-btn')
+    const overlay = document.getElementById('modal-overlay')
+    const modal = document.getElementById('modal')
+    const modalCloseButton = document.getElementById('modal-close-btn')
 
-    const modalCheckbox = /** @type HTMLInputElement */ (
-      document.getElementById('modal-checkbox')
-    )
-    const mainFormCheckbox = /** @type HTMLInputElement */ (
-      document.getElementById('liability-waiver')
-    )
+    const modalCheckbox = document.getElementById('modal-checkbox')
+    const mainFormCheckbox = document.getElementById('liability-waiver')
 
-    const signInForm = /** @type HTMLFormElement */ (
-      document.getElementById('sign-in')
-    )
-    const formSubmitButton = /** @type HTMLButtonElement */ (
-      document.getElementById('submit-btn')
-    )
+    const signInForm = document.getElementById('sign-in')
+    const formSubmitButton = document.getElementById('submit-btn')
 
     /** @type RequiredElements */
     const requiredElements = {
@@ -74,16 +60,16 @@ document.onreadystatechange = () => {
     formSubmitButton,
   }) {
     const hideModal = () => {
-      overlay.className = 'hidden'
-      modal.className = 'hidden'
+      overlay.classList.add('hidden')
+      modal.classList.add('hidden')
 
       if (modalCheckbox.checked !== mainFormCheckbox.checked)
         mainFormCheckbox.click()
     }
 
     const showModal = () => {
-      overlay.className = ''
-      modal.className = ''
+      overlay.classList.remove('hidden')
+      modal.classList.remove('hidden')
 
       modal.focus()
       modalCheckbox.checked = mainFormCheckbox.checked
