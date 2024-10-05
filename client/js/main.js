@@ -124,8 +124,10 @@ async function submitSignInForm(event) {
       /** @type HTMLFormElement */ (event.target),
     )
     console.log(formData)
-    await postFormData(formData)
+    const res = await postFormData(formData)
     console.log('submitted')
+
+    if (res.ok) window.location.href = 'http://localhost:8080/submitted'
   }
 }
 
