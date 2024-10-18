@@ -98,6 +98,36 @@ ul.invalid-field-warning {
   padding: 0.5rem 0.75rem;
 }
 
+.options-select {
+  flex-direction: column;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  max-width: 40rem;
+}
+
+.text {
+  width: 100%;
+  align-self: center;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+}
+
 .center-horizontal {
   display: flex;
   flex-direction: row;
@@ -224,6 +254,22 @@ input[required] {
   scroll-margin-top: 2rem;
 }
 
+a {
+  text-decoration: none;
+}
+
+.button {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #1f66e5;
+  color: white;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
 #liability-terms-btn {
   color: blue;
   text-decoration: underline;
@@ -306,6 +352,10 @@ input[required] {
   .name-fields {
     flex-direction: row;
     gap: 1rem;
+  }
+
+  .options-select {
+    flex-direction: row;
   }
 }
 
