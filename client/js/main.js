@@ -218,10 +218,12 @@ function getCurrentFormValues(form) {
   const fields = {
     'first-name': '',
     'last-name': '',
-    'phone-number': '',
+    email: '',
     'visitor-role': [],
     'liability-waiver': false,
+    newsletter: false,
     'photo-release': false,
+    'first-visit': false,
   }
 
   const data = new FormData(form)

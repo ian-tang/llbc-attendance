@@ -116,16 +116,14 @@
           <div class="name-fields">
             <div class="label-above">
               <label for="first-name">
-                <div>First name: <span class="required" aria-label="required">*</span></div>
+                <p>First name</p>
                 <input type="text" id="first-name" name="first-name" required />
                 <p class="hidden error-message">This field is required</p>
               </label>
             </div>
             <div class="label-above">
               <label for="last-name">
-                <div>
-                  <span>Last name: <span class="required" aria-label="required">*</span></span>
-                </div>
+                <p>Last name</p>
                 <input type="text" id="last-name" name="last-name" required />
                 <p class="hidden error-message">This field is required</p>
               </label>
@@ -133,7 +131,7 @@
           </div>
           <div class="label-above">
             <label for="email">
-              <div>Email <span class="required" aria-label="required">*</span></div>
+              <p>Email</p>
               <input type="email" id="email" name="email" required />
               <p class="hidden error-message">This field is required</p>
             </label>
@@ -145,7 +143,7 @@
         <h3 class="check-multiple">What brings you in today?</h3>
         <fieldset id="visitor-role">
           <legend>
-            I am here to: <span class="required" aria-label="required">*</span>
+            I am here to:
           </legend>
           <ul>
             <li>
@@ -184,7 +182,7 @@
         <h3>Liability waiver</h3>
         <fieldset>
           <legend>
-            Please read and agree to the terms: <span class="required" aria-label="required">*</span>
+            Please read and agree to the terms:
           </legend>
           <label class="checkbox" for="liability-waiver">
             <input type="checkbox" name="liability-waiver" id="liability-waiver" value="true" required />
@@ -198,7 +196,18 @@
       </section>
 
       <section>
-        <h3>Photo release</h3>
+        <h3 class="optional">Newsletter</h3>
+        <fieldset>
+          <legend>Would you like to sign up for our newsletter using your email from above?</legend>
+          <label class="checkbox" for="newsletter">
+            <input type="checkbox" name="newsletter" id="newsletter" value="true" />
+            Yes, I'd like to receive email newsletter updates (usually quarterly).
+          </label>
+        </fieldset>
+      </section>
+
+      <section>
+        <h3 class="optional">Photo release</h3>
         <fieldset>
           <legend>Would you be okay with your photo being used in public media (such as Instagram)?</legend>
           <label class="checkbox" for="photo-release">
@@ -210,7 +219,7 @@
       </section>
 
       <section>
-        <h3>First time visit</h3>
+        <h3 class="optional">First time visit</h3>
         <fieldset>
           <legend>Is this your first time visiting PBC?</legend>
           <label class="checkbox" for="first-visit">
@@ -218,10 +227,6 @@
             Yes, it's my first time here!
           </label>
         </fieldset>
-      </section>
-
-      <section class="center-horizontal">
-        <span class="required">* </span>&nbsp;– required
       </section>
 
       <section class="center-horizontal">

@@ -258,6 +258,13 @@ a {
   text-decoration: none;
 }
 
+.optional::after {
+  content: ' – Optional';
+  font-weight: lighter;
+  color: gray;
+  font-style: italic;
+}
+
 .button {
   display: grid;
   place-items: center;
