@@ -81,6 +81,19 @@ const validationMethods = {
   },
 
   /**
+   * @param {boolean} value If the newsletter checkbox is checked
+   */
+  newsletter: (value) => {
+    if (typeof value !== 'boolean')
+      return {
+        valid: false,
+        message: 'Value must be either true or false',
+      }
+
+    return VALID_ENTRY
+  },
+
+  /**
    * @param {boolean} value If the liability waiver checkbox is checked
    */
   'liability-waiver': (value) => {
@@ -111,19 +124,6 @@ const validationMethods = {
         }
       }
     }
-
-    return VALID_ENTRY
-  },
-
-  /**
-   * @param {boolean} value If the newsletter checkbox is checked
-   */
-  newsletter: (value) => {
-    if (typeof value !== 'boolean')
-      return {
-        valid: false,
-        message: 'Value must be either true or false',
-      }
 
     return VALID_ENTRY
   },
