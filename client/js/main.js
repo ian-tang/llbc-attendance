@@ -95,7 +95,7 @@ document.onreadystatechange = () => {
 
       const fieldsets = signInForm.getElementsByTagName('fieldset')
       for (let i = 0; i < fieldsets.length; i++) {
-        if (!isValidFieldset(fieldsets[i], getCurrentFormValues(signInForm))) {
+        if (!isValidFieldset(fieldsets[i], formFields)) {
           displayErrorMessagesWithin(fieldsets[i], signInForm)
           isValid && fieldsets[i].scrollIntoView({ behavior: 'smooth' })
           isValid = false
@@ -123,8 +123,10 @@ async function submitSignInForm(event) {
     const formData = getCurrentFormValues(
       /** @type HTMLFormElement */ (event.target),
     )
+
     console.log(formData)
-    const res = await postFormData(formData)
+    const reformatted = adaptFormValues(formData)
+    const res = await postFormData(reformatted)
     console.log('submitted')
 
     if (res.ok) window.location.href = 'http://localhost:8080/submitted'
@@ -238,4 +240,40 @@ function getCurrentFormValues(form) {
   }
 
   return fields
+}
+
+/**
+ * Formats form values for easier handling by backend
+ * @param {FormValues} values - FormValues
+ */
+function adaptFormValues(values) {
+  const reformatted = {}
+  const map = {
+    'first-name': 'FirstName',
+    'last-name': 'LastName',
+    email: 'Email',
+    'visitor-role': 'VisitorRole',
+    newsletter: 'Newsletter',
+    'photo-release': 'PhotoRelease',
+    'first-visit': 'FirstVisit',
+    volunteer: 'Volunteer',
+    'get-assistance': 'GetAssistance',
+    'purchase-parts-bikes': 'PurchasePartsBikes',
+    'donate-parts-bikes': 'DonatePartsBikes',
+  }
+
+  for (const [k, v] of Object.entries(values)) {
+    if (Array.isArray(values[k])) {
+      if (reformatted[map[k]] === undefined) reformatted[map[k]] = {}
+      for (const el of v) {
+        reformatted[map[k]][map[el]] = true
+      }
+
+      continue
+    }
+
+    if (map[k] !== undefined) reformatted[map[k]] = v
+  }
+
+  return reformatted
 }
