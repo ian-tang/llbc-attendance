@@ -84,6 +84,8 @@ ul.invalid-field-warning {
   margin-top: 1.5rem;
   padding: 1.5rem;
   gap: 1.5rem;
+  width: calc(100vw - 2rem);
+  min-width: calc(320px - 2rem);
   max-width: 40rem;
 }
 
@@ -274,7 +276,8 @@ a {
   background-color: #1f66e5;
   color: white;
   font-weight: bold;
-  white-space: nowrap;
+  text-align: center;
+  text-wrap: pretty;
 }
 
 #liability-terms-btn {
@@ -366,5 +369,5 @@ a {
   }
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 42rem) {
 }
