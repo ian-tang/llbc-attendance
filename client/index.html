@@ -8,234 +8,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>PBC Attendance Info</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 
 <body>
-  <script type="module" src="js/main.js"></script>
-
-  <div id="modal-overlay" class="hidden"></div>
-  <section id="modal" class="hidden">
-    <article id="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Left Loosey Bike Collective Liability Waiver</h3>
-        <button type="button" id="modal-close-btn">×</button>
-      </div>
-      <hr>
-      <section id="liability-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor turpis rutrum placerat imperdiet.
-          Maecenas
-          feugiat eu est sit amet gravida. Nullam varius blandit purus sit amet dictum. Nullam eleifend tempus ex vitae
-          mollis. Mauris ultricies euismod interdum. Aenean porta eu magna vel maximus. Sed vitae laoreet justo. Nunc
-          eleifend libero nec magna ornare, eu dignissim purus congue. Etiam quis mauris a urna sollicitudin pretium
-          eget
-          quis ante. Vivamus dictum ipsum ac vestibulum auctor. Maecenas lectus libero, porttitor eu convallis eget,
-          auctor
-          at lorem. Integer ornare, felis id luctus rhoncus, est risus elementum nibh, at mattis ante neque at odio.
-          Donec
-          ut tempor turpis, ac tristique mi. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in
-          faucibus.
-        </p>
-
-        <p>
-          Vivamus ut velit sem. Proin efficitur, eros quis eleifend lacinia, risus nibh aliquam lorem, ut auctor elit
-          ante
-          ac neque. Vivamus ipsum sapien, vehicula vitae sollicitudin nec, laoreet id sem. Duis aliquam ipsum erat.
-          Mauris
-          nisi nisl, ornare et nunc nec, ornare fermentum ante. Donec sit amet metus mauris. Proin aliquet felis sed
-          suscipit ultrices. Integer efficitur, nibh vitae malesuada auctor, neque nibh malesuada dui, vulputate
-          vestibulum
-          ante ante eu nisi. Praesent placerat, tellus sit amet consectetur tempor, augue felis placerat leo, vitae
-          posuere
-          enim erat quis tortor. Duis pellentesque est ut fringilla tempor.
-        </p>
-
-        <p>
-          Suspendisse eget felis lectus. Praesent mollis interdum nisi volutpat elementum. Ut convallis in justo ut
-          aliquet.
-          Morbi consectetur auctor magna, porta rutrum metus malesuada non. In sit amet lorem laoreet, vehicula ligula
-          elementum, fringilla turpis. Nulla imperdiet nisi lobortis, ultrices neque a, rutrum ligula. Morbi in ante
-          nulla.
-          Quisque finibus, ex at interdum posuere, ipsum nibh eleifend sem, quis posuere nibh magna vitae lorem. Etiam
-          id
-          tortor et nunc faucibus pretium. In hac habitasse platea dictumst. Quisque a nibh leo. Integer risus augue,
-          semper
-          in rutrum vel, blandit eu turpis.
-        </p>
-
-        <p>
-          Nam nec lorem eu turpis tristique tempus. Suspendisse at lectus quis eros aliquam imperdiet. Nulla et purus
-          lectus. Duis scelerisque est sed egestas sollicitudin. Nunc est nibh, lobortis vitae vehicula eget, tristique
-          vel
-          felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas vitae
-          mi
-          mollis, facilisis ante sed, molestie libero. Vivamus semper at ex vitae fermentum. Sed nunc metus, facilisis
-          et
-          bibendum rhoncus, ullamcorper ac mauris. Morbi quis neque eu lacus molestie accumsan eget ut magna. Aenean
-          tincidunt enim ut felis consectetur condimentum. Nulla dictum, odio quis interdum maximus, lacus nunc gravida
-          lacus, quis elementum purus elit quis elit.
-        </p>
-
-        <p>
-          Nam tellus turpis, finibus viverra pellentesque id, porta in turpis. In non velit sodales, tempor nisi ut,
-          pharetra lectus. Pellentesque vehicula massa non lacinia aliquam. Donec viverra urna nec sem efficitur, nec
-          fermentum tortor dapibus. Phasellus maximus tortor eu lectus laoreet, et facilisis ex eleifend. Aliquam
-          ornare,
-          elit suscipit convallis venenatis, dui neque molestie sem, non placerat dolor est sit amet elit. Integer
-          volutpat
-          diam sed magna scelerisque, quis suscipit urna faucibus. Nullam malesuada, augue eu volutpat fringilla, sapien
-          ligula vulputate sapien, in aliquam purus erat in purus. Sed ut congue orci, vitae tincidunt metus. Morbi sed
-          rutrum odio, et scelerisque metus. Nunc sagittis bibendum leo eu ultricies. Aliquam erat volutpat. Duis
-          pulvinar
-          ultrices massa eu consequat. Vivamus consequat, mauris non gravida vehicula, mauris tellus vestibulum diam,
-          vitae
-          maximus ante justo vitae enim. Etiam vulputate vitae nulla id tincidunt.
-        </p>
-      </section>
-      <label class="checkbox" id="modal-checkbox-label" for="modal-checkbox">
-        <input type="checkbox" id="modal-checkbox" />
-        <span>
-          By checking this box, I certify that I have read, understand, and agree to the terms above.
-        </span>
-      </label>
-    </article>
-  </section>
-
   <main class="main">
     <header>
       <h2 class="form-header shadow white-container">Welcome to Lefty Loosey Bike Collective!</h2>
     </header>
 
-    <form class="shadow white-container" id="sign-in" onsubmit="return false" novalidate>
-      <h2 class="form-header">Check in by entering your information</h2>
+    <div class="white-container shadow text-container" style="margin-top: 2rem;">
+      <header>
+        <h3>Sign in below</h3>
+        <hr>
+      </header>
 
-      <section>
-        <h3>Personal info</h3>
-        <fieldset class="personal-info">
-          <div class="name-fields">
-            <div class="label-above">
-              <label for="first-name">
-                <p>First name</p>
-                <input type="text" id="first-name" name="first-name" required />
-                <p class="hidden error-message">This field is required</p>
-              </label>
-            </div>
-            <div class="label-above">
-              <label for="last-name">
-                <p>Last name</p>
-                <input type="text" id="last-name" name="last-name" required />
-                <p class="hidden error-message">This field is required</p>
-              </label>
-            </div>
-          </div>
-          <div class="label-above">
-            <label for="email">
-              <p>Email</p>
-              <input type="email" id="email" name="email" required />
-              <p class="hidden error-message">This field is required</p>
-            </label>
-          </div>
-        </fieldset>
-      </section>
-
-      <section>
-        <h3 class="check-multiple">What brings you in today?</h3>
-        <fieldset id="visitor-role">
-          <legend>
-            I am here to:
-          </legend>
-          <ul>
-            <li>
-              <label class="checkbox" for="role-volunteer">
-                <input type="checkbox" name="visitor-role" id="role-volunteer" value="volunteer" />
-                Volunteer my time and help out
-              </label>
-            </li>
-            <li>
-              <label class="checkbox" for="role-get-assistance">
-                <input type="checkbox" name="visitor-role" id="role-get-assistance" value="get-assistance" />
-                Get assistance with repairing my bike
-              </label>
-            </li>
-            <li>
-              <label class="checkbox" for="role-purchase-parts">
-                <input type="checkbox" name="visitor-role" id="role-purchase-parts" value="purchase-parts-bikes" />
-                Buy a bike or bike parts
-              </label>
-            </li>
-            <li>
-              <label class="checkbox" for="role-donate-parts">
-                <input type="checkbox" name="visitor-role" id="role-donate-parts" value="donate-parts-bikes" />
-                Donate a bike or bike parts
-              </label>
-            </li>
-          </ul>
-          <label class="checkbox">
-            <div></div>
-            <p class="hidden error-message">Select at least 1 role</p>
-          </label>
-        </fieldset>
-      </section>
-
-      <section>
-        <h3>Liability waiver</h3>
-        <fieldset>
-          <legend>
-            Please read and agree to the terms:
-          </legend>
-          <label class="checkbox" for="liability-waiver">
-            <input type="checkbox" name="liability-waiver" id="liability-waiver" value="true" required />
-            <span>
-              By checking this box, I certify that I have read, understand, and agree to the terms of Lefty Loosey Bike
-              Collective's
-              <button type="button" id="liability-terms-btn">Liability Waiver</button>.
-              <p class="hidden error-message">Liability waiver is required</p>
-            </span>
-          </label>
-        </fieldset>
-      </section>
-
-      <section>
-        <h3 class="optional">Newsletter</h3>
-        <fieldset>
-          <legend>Would you like to sign up for our newsletter using your email from above?</legend>
-          <label class="checkbox" for="newsletter">
-            <input type="checkbox" name="newsletter" id="newsletter" value="true" />
-            Yes, I'd like to receive email newsletter updates (usually quarterly).
-          </label>
-        </fieldset>
-      </section>
-
-      <section>
-        <h3 class="optional">Photo release</h3>
-        <fieldset>
-          <legend>Would you be okay with your photo being used in public media (such as Instagram)?</legend>
-          <label class="checkbox" for="photo-release">
-            <input type="checkbox" name="photo-release" id="photo-release" value="true" />
-            Yes, I grant permission to Lefty Loosey Bike Collective to use videos or photographs of me for educational
-            purposes or for the promotion of Lefty Loosey-organized programs.
-          </label>
-        </fieldset>
-      </section>
-
-      <section>
-        <h3 class="optional">First time visit</h3>
-        <fieldset>
-          <legend>Is this your first time visiting Lefty Loosey?</legend>
-          <label class="checkbox" for="first-visit">
-            <input type="checkbox" name="first-visit" id="first-visit" value="true" />
-            Yes, it's my first time here!
-          </label>
-        </fieldset>
-      </section>
-
-      <section class="center-horizontal">
-        <button type="submit" id="submit-btn">Submit</button>
-      </section>
-    </form>
+      <div class="options-select grid">
+        <a class="button col" href="first-visit/">It's my first time here</a>
+        <a class="button col" href="returning/">I've been here before</a>
+        <p id="redirect-msg" class="text"></p>
+      </div>
+    </div>
 
   </main>
 </body>
-
-</html>

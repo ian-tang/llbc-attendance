@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PVD Bike Collective visitor sign-in form and liability waiver" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>PBC Attendance Info</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+  <script type="module" src="../js/returning.js"></script>
+
+  <main class="main">
+    <header>
+      <h2 class="form-header shadow white-container">Welcome to Lefty Loosey Bike Collective!</h2>
+    </header>
+
+    <form class="shadow white-container" id="sign-in" onsubmit="return false" novalidate>
+      <h2 class="form-header">Check in by entering your information</h2>
+
+      <section>
+        <h3>Personal info</h3>
+        <fieldset class="personal-info" id="personal-info">
+          <div class="label-above">
+            <label for="email">
+              <p>Email</p>
+              <input type="email" id="email" name="email" required />
+              <p class="hidden error-message">This field is required</p>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section>
+        <h3 class="check-multiple">What brings you in today?</h3>
+        <fieldset id="visitor-role">
+          <legend>
+            I am here to:
+          </legend>
+          <ul>
+            <li>
+              <label class="checkbox" for="role-volunteer">
+                <input type="checkbox" name="visitor-role" id="role-volunteer" value="volunteer" />
+                Volunteer my time and help out
+              </label>
+            </li>
+            <li>
+              <label class="checkbox" for="role-get-assistance">
+                <input type="checkbox" name="visitor-role" id="role-get-assistance" value="get-assistance" />
+                Get assistance with repairing my bike
+              </label>
+            </li>
+            <li>
+              <label class="checkbox" for="role-purchase-parts">
+                <input type="checkbox" name="visitor-role" id="role-purchase-parts" value="purchase-parts-bikes" />
+                Buy a bike or bike parts
+              </label>
+            </li>
+            <li>
+              <label class="checkbox" for="role-donate-parts">
+                <input type="checkbox" name="visitor-role" id="role-donate-parts" value="donate-parts-bikes" />
+                Donate a bike or bike parts
+              </label>
+            </li>
+          </ul>
+          <label class="checkbox">
+            <div></div>
+            <p class="hidden error-message">Select at least 1 role</p>
+          </label>
+        </fieldset>
+      </section>
+
+      <section class="center-horizontal">
+        <button type="submit" id="submit-btn">Submit</button>
+      </section>
+    </form>
+
+  </main>
+</body>
+
+</html>
