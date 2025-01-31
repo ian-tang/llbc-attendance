@@ -11,6 +11,15 @@ const VALID_ENTRY = {
   message: '',
 }
 
+/**
+ * Object with fields of valid visitor roles
+ * @typedef {object} VisitorRoles
+ * @property {boolean} volunteer
+ * @property {boolean} get-assistance
+ * @property {boolean} purchase-parts-bikes
+ * @property {boolean} donate-parts-bikes
+ */
+
 const VISITOR_ROLES = new Set([
   'volunteer',
   'get-assistance',
@@ -107,17 +116,19 @@ const validationMethods = {
   },
 
   /**
-   * @param {Array.<string>} roles An array of visitor roles that are checked
+   * @param {VisitorRoles} roles An object of visitor roles fields that are checked
    */
   'visitor-role': (roles) => {
-    if (roles.length === 0)
+    const selectedRoles = Object.entries(roles)
+    const hasSelection = selectedRoles.some(([_, v]) => v === true)
+    if (!hasSelection)
       return {
         valid: false,
         message: 'Select at least 1 role',
       }
 
-    for (const role of roles) {
-      if (!VISITOR_ROLES.has(role)) {
+    for (const [k, _] of selectedRoles) {
+      if (!VISITOR_ROLES.has(k)) {
         return {
           valid: false,
           message: 'Contains invalid visitor role',

@@ -125,8 +125,7 @@ async function submitSignInForm(event) {
     )
 
     console.log(formData)
-    const reformatted = adaptFormValues(formData)
-    const res = await postFormData(reformatted)
+    const res = await postFormData(formData)
     console.log('submitted')
 
     if (res.ok) window.location.href = 'http://localhost:8080/submitted'
@@ -221,18 +220,19 @@ function getCurrentFormValues(form) {
     'first-name': '',
     'last-name': '',
     email: '',
-    'visitor-role': [],
+    'visitor-role': {},
     'liability-waiver': false,
     newsletter: false,
     'photo-release': false,
-    'first-visit': false,
+    'first-visit': true,
+    'new-entry': true,
   }
 
   const data = new FormData(form)
 
   for (const [name, value] of data) {
-    if (Array.isArray(fields[name])) {
-      fields[name].push(value)
+    if (name === 'visitor-role') {
+      fields[name][value] = true
       continue
     }
 
@@ -240,40 +240,4 @@ function getCurrentFormValues(form) {
   }
 
   return fields
-}
-
-/**
- * Formats form values for easier handling by backend
- * @param {FormValues} values - FormValues
- */
-function adaptFormValues(values) {
-  const reformatted = {}
-  const map = {
-    'first-name': 'FirstName',
-    'last-name': 'LastName',
-    email: 'Email',
-    'visitor-role': 'VisitorRole',
-    newsletter: 'Newsletter',
-    'photo-release': 'PhotoRelease',
-    'first-visit': 'FirstVisit',
-    volunteer: 'Volunteer',
-    'get-assistance': 'GetAssistance',
-    'purchase-parts-bikes': 'PurchasePartsBikes',
-    'donate-parts-bikes': 'DonatePartsBikes',
-  }
-
-  for (const [k, v] of Object.entries(values)) {
-    if (Array.isArray(values[k])) {
-      if (reformatted[map[k]] === undefined) reformatted[map[k]] = {}
-      for (const el of v) {
-        reformatted[map[k]][map[el]] = true
-      }
-
-      continue
-    }
-
-    if (map[k] !== undefined) reformatted[map[k]] = v
-  }
-
-  return reformatted
 }
