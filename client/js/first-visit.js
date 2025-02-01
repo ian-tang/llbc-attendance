@@ -21,7 +21,7 @@ const FORM_FIELDS = {
   'liability-waiver': false,
   newsletter: false,
   'photo-release': false,
-  'first-visit': false,
+  'first-visit': true,
   'new-entry': true,
 }
 
