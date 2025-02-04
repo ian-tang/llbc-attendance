@@ -1,4 +1,4 @@
-import { postFormData } from './api.js'
+import { postNewVisitor, postResponse } from './api.js'
 import VALIDATION_METHODS from './validation.js'
 
 /**
@@ -15,7 +15,28 @@ export async function submitSignInForm(event, formFields, redirect) {
 
     // TODO: this is hot garbage rn
     console.log(formData)
-    const res = await postFormData(formData)
+    const res = await postNewVisitor(formData)
+    console.log('submitted')
+
+    if (res.ok && redirect !== undefined) window.location.href = redirect
+  }
+}
+
+/**
+ * @async
+ * @param {SubmitEvent} event
+ * @param {string} redirect - destination URL after the form is submitted
+ */
+export async function submitResponse(event, formFields, redirect) {
+  if (event.target !== null) {
+    const formData = getCurrentFormValues(
+      /** @type HTMLFormElement */ (event.target),
+      formFields,
+    )
+
+    // TODO: this is hot garbage rn
+    console.log(formData)
+    const res = await postResponse(formData)
     if (res.status === 409) {
       const personalInfoFieldset = document.getElementById('personal-info')
       const emailInput = document.getElementById('email')

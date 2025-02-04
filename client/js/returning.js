@@ -1,4 +1,4 @@
-import { validateAndSubmit, submitSignInForm } from './lib.js'
+import { validateAndSubmit, submitResponse } from './lib.js'
 /**
  * @typedef {object} RequiredElements
  * @property {HTMLFormElement} signInForm
@@ -36,7 +36,7 @@ document.onreadystatechange = () => {
  */
 function attachPageEventListeners({ signInForm, formSubmitButton }) {
   signInForm.addEventListener('submit', (event) =>
-    submitSignInForm(event, FORM_FIELDS, REDIRECT),
+    submitResponse(event, FORM_FIELDS, REDIRECT),
   )
 
   formSubmitButton.addEventListener('click', (event) =>
