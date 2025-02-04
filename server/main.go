@@ -1,32 +1,34 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
+	"log"
 	"net/http"
-	"strconv"
+	"server/controllers/submit"
+	sqliteDB "server/db"
+
+	"github.com/joho/godotenv"
 )
 
-const PORT int = 8090
-
-func submit(w http.ResponseWriter, req *http.Request) {
-
-	w.Header().Add("Access-Control-Allow-Origin", "http://localhost:8080")
-	w.Header().Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-	w.Header().Add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-	resJSON, _ := json.Marshal("received")
-	w.Write(resJSON)
-
-	data, _ := io.ReadAll(req.Body)
-	req.Body.Close()
-	fmt.Println(string(data))
-}
-
 func main() {
+	db := sqliteDB.New()
+	defer db.Close()
 
-	http.HandleFunc("/submit", submit)
+	envs, err := godotenv.Read(".env")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	fmt.Printf("Listening on port %d", PORT)
-	http.ListenAndServe(":"+strconv.Itoa(PORT), nil)
+	port, ok := envs["PORT"]
+	if !ok {
+		log.Fatal("Missing value from .env: PORT")
+	}
+
+	http.HandleFunc("OPTIONS /new-visitor", submit.HandleSubmitPreflight)
+	http.HandleFunc("OPTIONS /response", submit.HandleSubmitPreflight)
+	http.HandleFunc("POST /new-visitor", submit.HandleSubmitNewUser)
+	http.HandleFunc("POST /response", submit.HandleSubmitResponse)
+
+	fmt.Printf("Listening on port %v\n", port)
+	http.ListenAndServe(":"+port, nil)
 }
