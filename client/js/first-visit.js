@@ -1,4 +1,5 @@
-import { submitSignInForm, validateAndSubmit } from './lib.js'
+import { getCurrentFormValues, validateAndSubmit } from './lib.js'
+import { postNewVisitor } from './api.js'
 
 /**
  * @typedef {object} RequiredElements
@@ -104,7 +105,25 @@ function attachPageEventListeners({
   formSubmitButton.addEventListener('click', (event) =>
     validateAndSubmit(event, signInForm, FORM_FIELDS),
   )
-  signInForm.addEventListener('submit', (event) =>
-    submitSignInForm(event, FORM_FIELDS, REDIRECT),
-  )
+  signInForm.addEventListener('submit', (event) => submitSignInForm(event))
+}
+
+/**
+ * @async
+ * @param {SubmitEvent} event
+ * @param {string} redirect - destination URL after the form is submitted
+ */
+export async function submitSignInForm(event) {
+  if (event.target !== null) {
+    const formData = getCurrentFormValues(
+      /** @type HTMLFormElement */ (event.target),
+      FORM_FIELDS,
+    )
+
+    console.log(formData)
+    const res = await postNewVisitor(formData)
+    console.log('submitted')
+
+    if (res.ok && REDIRECT !== undefined) window.location.href = REDIRECT
+  }
 }
