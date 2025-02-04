@@ -1,4 +1,5 @@
 **/.secrets
+**/.env
 .actrc
 TODO.md
 server/data/
