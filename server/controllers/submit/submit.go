@@ -15,7 +15,7 @@ func HandleSubmitPreflight(w http.ResponseWriter, _ *http.Request) {
 }
 
 func HandleSubmitNewUser(w http.ResponseWriter, req *http.Request) {
-	w.Header().Add("Access-Control-Allow-Origin", "http://localhost:8080")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 
 	data, err := io.ReadAll(req.Body)
 	if err != nil {
@@ -41,7 +41,7 @@ func HandleSubmitNewUser(w http.ResponseWriter, req *http.Request) {
 }
 
 func HandleSubmitResponse(w http.ResponseWriter, req *http.Request) {
-	w.Header().Add("Access-Control-Allow-Origin", "http://localhost:8080")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 
 	data, err := io.ReadAll(req.Body)
 	if err != nil {
