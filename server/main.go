@@ -24,6 +24,9 @@ func main() {
 		log.Fatal("Missing value from .env: PORT")
 	}
 
+	fs := http.FileServer(http.Dir("../client"))
+	http.Handle("GET /", fs)
+
 	http.HandleFunc("OPTIONS /new-visitor", submit.HandleSubmitPreflight)
 	http.HandleFunc("OPTIONS /response", submit.HandleSubmitPreflight)
 	http.HandleFunc("POST /new-visitor", submit.HandleSubmitNewUser)
