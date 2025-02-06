@@ -44,7 +44,7 @@ function attachPageEventListeners({ signInForm, formSubmitButton }) {
   signInForm.addEventListener('submit', (event) => submitResponse(event))
 
   formSubmitButton.addEventListener('click', (event) =>
-    validateAndSubmit(event),
+    validateAndSubmit(event, signInForm, FORM_FIELDS),
   )
 }
 
