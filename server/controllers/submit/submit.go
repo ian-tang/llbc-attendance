@@ -9,7 +9,7 @@ import (
 )
 
 func HandleSubmitPreflight(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Add("Access-Control-Allow-Origin", "http://localhost:8080")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	w.Header().Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	w.Header().Add("Access-Control-Allow-Headers", "Content-Type, Authorization")
 }
