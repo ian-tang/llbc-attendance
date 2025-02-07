@@ -62,6 +62,8 @@ func HandleSubmitResponse(w http.ResponseWriter, req *http.Request) {
 
 	if _, err = user.CreateResponse(userRes); err != nil {
 		fmt.Println(err)
+		w.WriteHeader(409)
+		return
 	}
 	w.WriteHeader(201)
 }
