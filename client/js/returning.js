@@ -11,7 +11,7 @@ import { postResponse } from './api.js'
  * @property {HTMLButtonElement} formSubmitButton
  */
 
-const REDIRECT = 'http://localhost:8080/submitted'
+const REDIRECT = '../submitted'
 const FORM_FIELDS = {
   email: '',
   'visitor-role': {},

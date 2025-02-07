@@ -13,7 +13,7 @@ import { postNewVisitor } from './api.js'
  * @property {HTMLButtonElement} formSubmitButton
  */
 
-const REDIRECT = 'http://localhost:8080/submitted'
+const REDIRECT = '../submitted'
 const FORM_FIELDS = {
   'first-name': '',
   'last-name': '',
