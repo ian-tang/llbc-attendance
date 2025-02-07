@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/joho/godotenv"
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 var db *sql.DB
@@ -23,7 +23,7 @@ func init() {
 		log.Fatalf("Could not find required value %v\n", dbFilePath)
 	}
 
-	conn, err := sql.Open("sqlite3", dbPath)
+	conn, err := sql.Open("sqlite", dbPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,6 +52,7 @@ func createTables() {
 		role_get_assistance BOOLEAN NOT NULL,
 		role_purchase BOOLEAN NOT NULL,
 		role_donate BOOLEAN NOT NULL,
+		first_visit BOOLEAN NOT NULL,
 		submission_time TEXT NOT NULL,
 		FOREIGN KEY (user_id)
 			REFERENCES users (id)
