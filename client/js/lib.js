@@ -1,4 +1,3 @@
-import { postResponse } from './api.js'
 import VALIDATION_METHODS from './validation.js'
 
 /**
