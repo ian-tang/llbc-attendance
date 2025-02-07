@@ -23,6 +23,14 @@ func main() {
 	if !ok {
 		log.Fatal("Missing value from .env: PORT")
 	}
+	cert, ok := envs["CERT_FILE"]
+	if !ok {
+		log.Fatal("Missing value from .env: CERT_FILE")
+	}
+	key, ok := envs["KEY_FILE"]
+	if !ok {
+		log.Fatal("Missing value from .env: KEY_FILE")
+	}
 
 	http.HandleFunc("OPTIONS /new-visitor", submit.HandleSubmitPreflight)
 	http.HandleFunc("OPTIONS /response", submit.HandleSubmitPreflight)
@@ -30,5 +38,5 @@ func main() {
 	http.HandleFunc("POST /response", submit.HandleSubmitResponse)
 
 	fmt.Printf("Listening on port %v\n", port)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServeTLS(":"+port, cert, key, nil)
 }
