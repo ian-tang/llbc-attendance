@@ -17,25 +17,19 @@ const FORM_FIELDS = {
   'visitor-role': {},
 }
 
-document.onreadystatechange = () => {
-  if (
-    document.readyState === 'interactive' ||
-    document.readyState === 'complete'
-  ) {
-    // check for necessary DOM elements
-    const signInForm = document.getElementById('sign-in')
-    const formSubmitButton = document.getElementById('submit-btn')
+document.addEventListener('DOMContentLoaded', () => {
+  // check for necessary DOM elements
+  const signInForm = document.getElementById('sign-in')
+  const formSubmitButton = document.getElementById('submit-btn')
 
-    /** @type RequiredElements */
-    const requiredElements = {
-      signInForm,
-      formSubmitButton,
-    }
-
-    if (!Object.values(requiredElements).some((el) => el === null))
-      attachPageEventListeners(requiredElements)
+  /** @type RequiredElements */
+  const requiredElements = {
+    signInForm,
+    formSubmitButton,
   }
-}
+
+  attachPageEventListeners(requiredElements)
+})
 
 /**
  * @param {RequiredElements} requiredElements

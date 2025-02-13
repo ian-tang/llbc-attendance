@@ -32,51 +32,45 @@ const FORM_FIELDS = {
   'new-entry': true,
 }
 
-document.onreadystatechange = () => {
-  if (
-    document.readyState === 'interactive' ||
-    document.readyState === 'complete'
-  ) {
-    // check for necessary DOM elements
-    const showWaiverButton = document.getElementById('liability-terms-btn')
-    const showPhotoReleaseButton = document.getElementById('photo-release-btn')
-    const overlay = document.getElementById('modal-overlay')
-    const modal = document.getElementById('modal')
-    const modalTitle = document.getElementById('modal-title')
-    const modalBody = document.getElementById('modal-body')
-    const modalCloseButton = document.getElementById('modal-close-btn')
+document.addEventListener('DOMContentLoaded', () => {
+  // check for necessary DOM elements
+  const showWaiverButton = document.getElementById('liability-terms-btn')
+  const showPhotoReleaseButton = document.getElementById('photo-release-btn')
+  const overlay = document.getElementById('modal-overlay')
+  const modal = document.getElementById('modal')
+  const modalTitle = document.getElementById('modal-title')
+  const modalBody = document.getElementById('modal-body')
+  const modalCloseButton = document.getElementById('modal-close-btn')
 
-    const modalCheckbox = document.getElementById('modal-checkbox')
-    const liabilityCheckbox = document.getElementById('liability-waiver')
-    const photoReleaseCheckbox = document.getElementById('photo-release')
+  const modalCheckbox = document.getElementById('modal-checkbox')
+  const liabilityCheckbox = document.getElementById('liability-waiver')
+  const photoReleaseCheckbox = document.getElementById('photo-release')
 
-    const signInForm = document.getElementById('sign-in')
-    const formSubmitButton = document.getElementById('submit-btn')
+  const signInForm = document.getElementById('sign-in')
+  const formSubmitButton = document.getElementById('submit-btn')
 
-    /** @type RequiredElements */
-    const requiredElements = {
-      showWaiverButton,
-      showPhotoReleaseButton,
-      overlay,
-      modal,
-      modalTitle,
-      modalCloseButton,
-      modalCheckbox,
-      liabilityCheckbox,
-      photoReleaseCheckbox,
-      modalBody,
-      signInForm,
-      formSubmitButton,
-    }
-
-    if (!Object.values(requiredElements).some((el) => el === null))
-      attachPageEventListeners(requiredElements)
+  /** @type RequiredElements */
+  const requiredElements = {
+    showWaiverButton,
+    showPhotoReleaseButton,
+    overlay,
+    modal,
+    modalTitle,
+    modalCloseButton,
+    modalCheckbox,
+    liabilityCheckbox,
+    photoReleaseCheckbox,
+    modalBody,
+    signInForm,
+    formSubmitButton,
   }
+
+  attachPageEventListeners(requiredElements)
 
   const urlSearchParams = new URLSearchParams(window.location.search)
   if (urlSearchParams.get('new-entry') === 'true')
     FORM_FIELDS['first-visit'] = false
-}
+})
 
 /**
  * @param {RequiredElements} requiredElements
