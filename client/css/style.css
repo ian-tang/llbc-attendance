@@ -268,8 +268,9 @@ a {
 }
 
 .button {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   border-radius: 0.5rem;
   border: none;
@@ -280,7 +281,11 @@ a {
   text-wrap: pretty;
 }
 
-#liability-terms-btn {
+.button:hover {
+  background-color: #185bd2;
+}
+
+.show-modal-btn {
   color: blue;
   text-decoration: underline;
   position: relative;
@@ -291,21 +296,16 @@ a {
   margin: 0;
 }
 
-#submit-btn {
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: none;
-  background-color: #1f66e5;
-  color: white;
-  font-weight: bold;
-}
-
 #modal-overlay {
   position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 20;
+}
+
+#modal[hidden] {
+  display: none;
 }
 
 #modal {
@@ -315,7 +315,6 @@ a {
   transform: translateY(-50%);
   width: 90vw;
   max-width: 800px;
-  height: 90vh;
   max-height: 600px;
   background-color: white;
   border-radius: 1rem;
@@ -332,7 +331,7 @@ a {
   flex-direction: column;
 }
 
-#liability-text {
+#modal-body {
   margin-top: 1rem;
   scrollbar-gutter: stable;
   overflow-y: scroll;
@@ -340,8 +339,20 @@ a {
   flex-grow: 1;
 }
 
-#liability-text p + p {
+#modal-body p + p {
   margin-top: 1rem;
+}
+
+#modal-body ol + p {
+  margin-top: 1rem;
+}
+
+#modal-body p + ol {
+  margin-top: 1rem;
+}
+
+#modal-body li {
+  list-style-type: decimal;
 }
 
 #modal-checkbox-label {

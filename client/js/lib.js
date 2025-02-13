@@ -42,7 +42,7 @@ export function displayErrorMessagesWithin(el, formRef, formFields) {
       errorMessageRef !== null &&
       errorMessageRef.classList.contains('error-message')
     ) {
-      errorMessageRef.classList.remove('hidden')
+      errorMessageRef.hidden = false
       errorMessageRef.innerHTML = validationResult.message
       inputs[i].addEventListener('input', () => {
         const updatedForm = getCurrentFormValues(formRef, formFields)
@@ -50,7 +50,7 @@ export function displayErrorMessagesWithin(el, formRef, formFields) {
           updatedForm[inputs[i].name],
         ).valid
 
-        if (isNowValid) errorMessageRef.classList.add('hidden')
+        if (isNowValid) errorMessageRef.hidden = true
       })
     }
 
@@ -61,7 +61,7 @@ export function displayErrorMessagesWithin(el, formRef, formFields) {
         errorMessages[0].previousElementSibling &&
         errorMessages[0].previousElementSibling.tagName !== 'INPUT'
       )
-        errorMessages[0].classList.remove('hidden')
+        errorMessages[0].hidden = false
     }
 
     el.addEventListener('input', () => {
@@ -72,7 +72,7 @@ export function displayErrorMessagesWithin(el, formRef, formFields) {
         errorMessages[0].previousElementSibling &&
         errorMessages[0].previousElementSibling.tagName !== 'INPUT'
       )
-        errorMessages[0].classList.add('hidden')
+        errorMessages[0].hidden = true
     })
   }
 }
