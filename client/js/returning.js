@@ -54,8 +54,6 @@ export async function submitResponse(event) {
       FORM_FIELDS,
     )
 
-    // TODO: this is hot garbage rn
-    console.log(formData)
     const res = await postResponse(formData)
     if (res.status === 409) {
       const personalInfoFieldset = document.getElementById('personal-info')
@@ -64,7 +62,7 @@ export async function submitResponse(event) {
       if (emailInput && errorMsgRef) {
         errorMsgRef.innerHTML =
           'Could not find an entry with this email. Please check your input or <a style="text-decoration: underline" href="../first-visit/?new-entry=true">sign in as a new visitor</a>.'
-        errorMsgRef.classList.remove('hidden')
+        errorMsgRef.hidden = false
         personalInfoFieldset.classList.add('invalid-field-warning')
       }
       const formRef = document.getElementById('sign-in')
@@ -76,10 +74,9 @@ export async function submitResponse(event) {
           )
         )
           personalInfoFieldset.classList.remove('invalid-field-warning')
-        errorMsgRef.classList.add('hidden')
+        errorMsgRef.hidden = true
       })
     }
-    console.log('submitted')
 
     if (res.ok && REDIRECT !== undefined) window.location.href = REDIRECT
   }
