@@ -19,24 +19,35 @@ func main() {
 		log.Fatal(err)
 	}
 
-	port, ok := envs["PORT"]
-	if !ok {
-		log.Fatal("Missing value from .env: PORT")
-	}
-	cert, ok := envs["CERT_FILE"]
-	if !ok {
-		log.Fatal("Missing value from .env: CERT_FILE")
-	}
-	key, ok := envs["KEY_FILE"]
-	if !ok {
-		log.Fatal("Missing value from .env: KEY_FILE")
-	}
-
 	http.HandleFunc("OPTIONS /new-visitor", submit.HandleSubmitPreflight)
 	http.HandleFunc("OPTIONS /response", submit.HandleSubmitPreflight)
 	http.HandleFunc("POST /new-visitor", submit.HandleSubmitNewUser)
 	http.HandleFunc("POST /response", submit.HandleSubmitResponse)
 
+	env, ok := envs["ENV"]
+	if !ok {
+		log.Fatal("Missing value from .env: ENV")
+	}
+	port, ok := envs["PORT"]
+	if !ok {
+		log.Fatal("Missing value from .env: PORT")
+	}
+
+	if env == "PROD" {
+		cert, ok := envs["CERT_FILE"]
+		if !ok {
+			log.Fatal("Missing value from .env: CERT_FILE")
+		}
+		key, ok := envs["KEY_FILE"]
+		if !ok {
+			log.Fatal("Missing value from .env: KEY_FILE")
+		}
+
+		fmt.Printf("Listening on port %v\n", port)
+		http.ListenAndServeTLS(":"+port, cert, key, nil)
+		return
+	}
+
 	fmt.Printf("Listening on port %v\n", port)
-	http.ListenAndServeTLS(":"+port, cert, key, nil)
+	http.ListenAndServe(":"+port, nil)
 }
