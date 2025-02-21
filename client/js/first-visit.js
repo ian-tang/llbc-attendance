@@ -104,10 +104,6 @@ function attachPageEventListeners({
     modalTitle.innerText = title
     modalBody.innerHTML = body
 
-    const mainTag = document.getElementsByTagName('main')[0]
-    const focusableElements = mainTag.querySelectorAll('input, button')
-    focusableElements.forEach((el) => (el.tabIndex = -1))
-
     const syncCheckbox = () => {
       checkboxRef.checked = modalCheckbox.checked
     }
