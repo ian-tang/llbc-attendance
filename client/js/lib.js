@@ -84,11 +84,9 @@ export function displayErrorMessagesWithin(el, formRef, formFields) {
  */
 export function getCurrentFormValues(formRef, formFields) {
   const data = new FormData(formRef)
-
-  console.log('formFields:', formFields)
+  formFields = structuredClone(formFields)
 
   for (const [name, value] of data) {
-    console.log(name, value)
     if (typeof formFields[name] === 'object') {
       formFields[name][value] = true
       continue
@@ -117,11 +115,6 @@ export function validateAndSubmit(event, formRef, formFields) {
       isValid && fieldsets[i].scrollIntoView({ behavior: 'smooth' })
       isValid = false
     }
-  }
-
-  console.log('form is complete:', isValid)
-  for (const [name, value] of Object.entries(formValues)) {
-    console.log(name, value)
   }
 
   if (isValid) formRef.requestSubmit()
