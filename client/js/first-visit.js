@@ -111,7 +111,6 @@ function attachPageEventListeners({
     modalCheckbox.addEventListener('click', syncCheckbox)
 
     const closeModal = () => {
-      focusableElements.forEach((el) => (el.tabIndex = 0))
       hideModal()
       modalCheckbox.removeEventListener('click', syncCheckbox)
       checkboxRef.focus()
