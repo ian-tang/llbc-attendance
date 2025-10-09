@@ -1,0 +1,51 @@
+@import url('./reset.css');
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --white: #ffffff;
+  --light-gray: #e0e0e0;
+  --pink: #feb3e1;
+  --green: #308535;
+  --blue: #2a50ff;
+  --dark-blue: #002cf6;
+  --indigo: #001c9f;
+  --black: #1f1f1f;
+
+  color: #222;
+  background-color: #f0f0f0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: auto;
+  display: flex;
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page {
+  padding: 2rem 0.5rem;
+}
+
+.form section {
+  margin-top: 1rem;
+}

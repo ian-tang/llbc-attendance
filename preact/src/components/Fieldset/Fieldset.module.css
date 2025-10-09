@@ -1,0 +1,18 @@
+.group {
+  text-align: left;
+}
+
+.fieldset {
+  border: 0.125rem solid #bebebd;
+  border-radius: 0.5rem;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.legend {
+  text-wrap: pretty;
+  max-width: 85%;
+  padding: 0.25rem 0.5rem;
+  background-color: #dfe9fb;
+  border-radius: 0.5rem;
+}

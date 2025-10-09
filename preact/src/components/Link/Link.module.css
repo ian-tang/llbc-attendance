@@ -1,0 +1,18 @@
+.link {
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  font-weight: 700;
+  background-color: var(--blue);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition-duration: 250ms;
+  text-decoration: none;
+}
+
+.link:hover {
+  cursor: pointer;
+  background-color: var(--dark-blue);
+}

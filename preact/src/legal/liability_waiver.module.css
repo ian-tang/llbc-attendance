@@ -1,0 +1,19 @@
+.liability {
+  margin-top: 1rem;
+  text-align: left;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  overscroll-behavior-y: none;
+}
+
+.liability p + ol {
+  margin-top: 0.5rem;
+}
+
+.liability ol + p {
+  margin-top: 0.5rem;
+}
+
+.liability p + p {
+  margin-top: 0.5rem;
+}

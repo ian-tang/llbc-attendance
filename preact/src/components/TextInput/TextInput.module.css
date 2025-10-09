@@ -1,0 +1,22 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.text-input {
+  color: black;
+  outline: none;
+  border: 0.15rem solid var(--black);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--white);
+}
+
+.text-input:focus {
+  border-color: var(--blue);
+}
+
+.text-input:focus-visible {
+  border-color: var(--blue);
+}
