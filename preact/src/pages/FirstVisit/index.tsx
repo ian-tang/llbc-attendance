@@ -8,27 +8,22 @@ import { ErrorMessage } from '../../components/ErrorMessage'
 import { Modal } from '../../components/Modal'
 import { validate } from '../../lib/validation'
 import { LIABILITY_TEXT } from '../../legal/liability_waiver'
-import { postNewVisitor } from '../../api'
+import { ActionNetworkAttendanceSubmission, postAttendance } from '../../api'
 import styles from './FirstVisit.module.css'
 
 const REDIRECT = '../submitted'
 
-interface FormState {
+type FormState = {
   'first-name': string
   'last-name': string
   email: string
-  'visitor-role': {
-    volunteer: boolean
-    'get-assistance': boolean
-    'purchase-parts-bikes': boolean
-    'donate-parts-bikes': boolean
-  }
+  'visitor-role': Set<string>
   liability: boolean
   newsletter: boolean
   'photo-release': boolean
 }
 
-interface ErrorMessageState {
+type ErrorMessageState = {
   'first-name': string
   'last-name': string
   email: string
@@ -36,17 +31,45 @@ interface ErrorMessageState {
   liability: string
 }
 
+function formatForActionNetwork(
+  formData: FormState,
+): ActionNetworkAttendanceSubmission {
+  const tagMap = {
+    volunteer: 'volunteer',
+    'get-assistance': 'client',
+    'donate-parts-bikes': 'bike_parts_donor',
+    liability: 'accepted_liability_waiver',
+    'photo-release': 'accepted_photo_release',
+  }
+
+  const formatted: ActionNetworkAttendanceSubmission = {
+    person: {
+      given_name: formData['first-name'],
+      family_name: formData['last-name'],
+      email_addresses: [
+        {
+          address: formData.email,
+          status: formData.newsletter ? 'subscribed' : 'unsubscribed',
+        },
+      ],
+    },
+    add_tags: [],
+  }
+
+  formData['visitor-role'].forEach((v) => formatted.add_tags.push(tagMap[v]))
+  for (const k of Object.keys(tagMap)) {
+    if (formData[k] === true) formatted.add_tags.push(tagMap[k])
+  }
+
+  return formatted
+}
+
 export const FirstVisit = () => {
   const [formState, setFormState] = useState<FormState>({
     'first-name': '',
     'last-name': '',
     email: '',
-    'visitor-role': {
-      volunteer: false,
-      'get-assistance': false,
-      'purchase-parts-bikes': false,
-      'donate-parts-bikes': false,
-    },
+    'visitor-role': new Set(),
     liability: false,
     newsletter: false,
     'photo-release': false,
@@ -64,7 +87,9 @@ export const FirstVisit = () => {
     const el = e.target as HTMLInputElement
     // probably not actually type safe
     if (el.name === 'visitor-role') {
-      formState[el.name][el.value] = el.checked
+      el.checked
+        ? formState['visitor-role'].add(el.value)
+        : formState['visitor-role'].delete(el.value)
     } else {
       formState[el.name] = el.type === 'checkbox' ? el.checked : el.value
     }
@@ -105,7 +130,7 @@ export const FirstVisit = () => {
       }
     }
 
-    const res = await postNewVisitor(formState)
+    const res = await postAttendance(formatForActionNetwork(formState))
     if (!res.ok) return
     window.location.href = REDIRECT
   }
@@ -198,14 +223,7 @@ export const FirstVisit = () => {
               name="visitor-role"
               value="get-assistance"
             >
-              Get assistance with repairing my bike
-            </Checkbox>
-            <Checkbox
-              onInput={handleChange}
-              name="visitor-role"
-              value="purchase-parts-bikes"
-            >
-              Buy a bike or bike parts
+              Get assistance with repairing my bike or purchasing a new bike
             </Checkbox>
             <Checkbox
               onInput={handleChange}
@@ -256,7 +274,7 @@ export const FirstVisit = () => {
           <Fieldset
             onInput={handleChange}
             heading="Newsletter"
-            legend="Would you like to sign up for our newsletter with your email from above?"
+            legend="Would you like to sign up for our newsletter with your email from above? (Check this box if you are currently subscribed and would like to remain subscribed.)"
           >
             <Checkbox name="newsletter" onInput={handleChange}>
               Yes, I'd like to receive email newsletter updates (usually

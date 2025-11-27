@@ -3,13 +3,6 @@ const emailRegex =
 
 const nameRegex = /^\p{Script=Latin}([ -]?\p{Script=Latin})*$/u
 
-interface VisitorRoles {
-  volunteer: boolean
-  'get-assistance': boolean
-  'purchase-parts-bikes': boolean
-  'donate-parts-bikes': boolean
-}
-
 const validateName = (name: string) => {
   if (name === '') return 'Name is required'
   if (!nameRegex.test(name)) return 'Only letters are allowed in name fields'
@@ -22,9 +15,8 @@ const validateEmail = (email: string) => {
   return ''
 }
 
-const validateVisitorRole = (roles: VisitorRoles) => {
-  if (Object.values(roles).every((v) => v === false))
-    return 'Please select a role'
+const validateVisitorRole = (roles: Set<string>) => {
+  if (roles.size === 0) return 'Please select a role'
   return ''
 }
 

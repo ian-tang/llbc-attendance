@@ -1,6 +1,7 @@
 import { Link } from '../../components/Link'
 import { Card } from '../../components/Card'
 import './style.css'
+import { ActiveEvent } from '../../components/ActiveEvent'
 
 export function Home() {
   return (
@@ -13,8 +14,9 @@ export function Home() {
         </section>
         <section className="options">
           <Link href="first-visit">It's my first time here</Link>
-          <Link href="returning">I've signed in electronically before</Link>
+          <Link href="returning">I've signed in before</Link>
         </section>
+        <ActiveEvent />
       </Card>
     </div>
   )

@@ -4,7 +4,10 @@ import styles from './Header.module.css'
 export function Header() {
   const { url } = useLocation()
   const signInPages =
-    url === '/' || url === '/first-visit' || url === '/returning'
+    url === '/' ||
+    url === '/first-visit' ||
+    url === '/returning' ||
+    url === '/submitted'
 
   return (
     <header className={styles.header}>
@@ -12,9 +15,7 @@ export function Header() {
         <a href="/" className={signInPages && styles.active}>
           Sign In
         </a>
-        <a href="http://www.leftylooseybikecollective.org">
-          Lefty Loosey Main Site
-        </a>
+        <a href="http://www.leftylooseybikecollective.org">leftyloosey.org</a>
       </nav>
     </header>
   )

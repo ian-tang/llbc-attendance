@@ -7,29 +7,44 @@ import { ErrorMessage } from '../../components/ErrorMessage'
 import { Button } from '../../components/Button'
 import { validate } from '../../lib/validation'
 import styles from './Returning.module.css'
-import { postResponse } from '../../api'
+import { ActionNetworkAttendanceSubmission, postAttendance } from '../../api'
 
 const REDIRECT = '../submitted'
 
-interface FormState {
+type FormState = {
   email: string
-  'visitor-role': {
-    volunteer: boolean
-    'get-assistance': boolean
-    'purchase-parts-bikes': boolean
-    'donate-parts-bikes': boolean
+  'visitor-role': Set<string>
+}
+
+function formatForActionNetwork(
+  formData: FormState,
+): ActionNetworkAttendanceSubmission {
+  const tagMap = {
+    volunteer: 'volunteer',
+    'get-assistance': 'client',
+    'donate-parts-bikes': 'bike_parts_donor',
   }
+
+  const formatted: ActionNetworkAttendanceSubmission = {
+    person: {
+      email_addresses: [
+        {
+          address: formData.email,
+        },
+      ],
+    },
+    add_tags: [],
+  }
+
+  formData['visitor-role'].forEach((v) => formatted.add_tags.push(tagMap[v]))
+
+  return formatted
 }
 
 export const Returning = () => {
   const [formState, setFormState] = useState<FormState>({
     email: '',
-    'visitor-role': {
-      volunteer: false,
-      'get-assistance': false,
-      'purchase-parts-bikes': false,
-      'donate-parts-bikes': false,
-    },
+    'visitor-role': new Set(),
   })
   const [emailError, setEmailError] = useState('')
   const [roleError, setRoleError] = useState('')
@@ -37,7 +52,9 @@ export const Returning = () => {
   const handleChange = (e: InputEvent) => {
     const el = e.target as HTMLInputElement
     if (el.name === 'visitor-role') {
-      formState['visitor-role'][el.value] = el.checked
+      el.checked
+        ? formState['visitor-role'].add(el.value)
+        : formState['visitor-role'].delete(el.value)
     } else {
       formState.email = el.value
     }
@@ -57,13 +74,13 @@ export const Returning = () => {
 
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault()
-    setEmailError(validate.email(formState.email))
-    setRoleError(validate['visitor-role'](formState['visitor-role']))
-    const res = await postResponse(formState)
-    if (res.status === 409) {
-      setEmailError('This email has not signed in before.')
-      return
-    }
+    const emailErrMsg = validate.email(formState.email)
+    const roleErrMsg = validate['visitor-role'](formState['visitor-role'])
+    setEmailError(emailErrMsg)
+    setRoleError(roleErrMsg)
+    if (emailErrMsg || roleErrMsg) return
+
+    const res = await postAttendance(formatForActionNetwork(formState))
 
     window.location.href = REDIRECT
   }
@@ -101,28 +118,21 @@ export const Returning = () => {
           <Checkbox
             onInput={handleChange}
             name="visitor-role"
-            value="role-volunteer"
+            value="volunteer"
           >
             Volunteer my time and help out
           </Checkbox>
           <Checkbox
             onInput={handleChange}
             name="visitor-role"
-            value="role-get-assistance"
+            value="get-assistance"
           >
             Get assistance with repairing my bike
           </Checkbox>
           <Checkbox
             onInput={handleChange}
             name="visitor-role"
-            value="role-purchase"
-          >
-            Buy a bike or bike parts
-          </Checkbox>
-          <Checkbox
-            onInput={handleChange}
-            name="visitor-role"
-            value="role-donate"
+            value="donate-parts-bikes"
           >
             Donate a bike or bike parts
           </Checkbox>
